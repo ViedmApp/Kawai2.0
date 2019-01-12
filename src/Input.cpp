@@ -23,6 +23,16 @@ void Input::initialiceInput(){
 
   if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS and !firstPlayer->isSlowed)
     firstPlayer ->accelerate();
+  
+  if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS)
+  {
+    btVector3 position = mapa->getP1StartPosition();
+    firstPlayer->updatePhysics();
+    firstPlayer->updateTurn();
+    firstPlayer -> setPosition(position[0],position[1],position[2]);
+  }
+    
+  
   if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_RELEASE)
     firstPlayer -> updatePhysics();
   if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)

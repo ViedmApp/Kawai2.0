@@ -107,22 +107,22 @@ void Game::init()
 	vehicle2 -> updatePhysics();
 
 	Light* lights_arr = new Light(shader_programme);
-	lights_arr->addLight(glm::vec3(100.0, -100.0, 100.0),
+	lights_arr->addLight(glm::vec3(10.0, 10.0, 10.0),
 		glm::vec3 (1.0, 0.0, 0.0),
-		glm::vec3 (0.9, 0.9, 0.9),
+		glm::vec3 (0.0, 0.0, 0.0),
 		glm::vec3 (0.0, 0.0, 0.0),
 		glm::vec3 (1.0, 0.7, 0.7),
-		glm::vec3 (1.0, 1.0, 1.0),
-		glm::vec3 (1.0, 1.0, 1.0),50);
+		glm::vec3 (0.0, .6, 0.0),
+		glm::vec3 (.04, 0.3, 0.8),32);
 
 		
 	lights_arr->addLight(glm::vec3(50.0, 60.0, 100.0),
-		glm::vec3 (0.0, 1.0, 0.0),
+		glm::vec3 (0.0, 1.0, 1.0),
 		glm::vec3 (0.2, 0.2, 0.2),
 		glm::vec3 (0.0, 0.0, 0.0),
 		glm::vec3 (0.7, 0.2, 0.7),
 		glm::vec3 (1.0, 1.0, 1.0),
-		glm::vec3 (1.0, 1.0, 1.0),500);
+		glm::vec3 (1.0, 1.0, 1.0),12);
 	
 	lights_arr->initLights();
 
@@ -241,6 +241,17 @@ void Game::DetectCollision()
         {
         	vehicle2 -> slowDown(0.5f);
         	vehicle1->bala->setPosition(100,100,100);
+        }
+
+		if (vehicle2->bala == obA->getUserPointer() and vehicle1 == obB->getUserPointer())
+        {
+			vehicle1 -> slowDown(0.5f);
+			vehicle2-> bala->setPosition(100,100,100);
+        }
+        else if (vehicle1 == obA->getUserPointer() and vehicle2->bala == obB->getUserPointer())
+        {
+        	vehicle1 -> slowDown(0.5f);
+        	vehicle2->bala->setPosition(100,100,100);
         }
     }
 }

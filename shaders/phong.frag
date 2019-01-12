@@ -33,7 +33,7 @@ vec3 WKd = vec3 (1.0, 1.0, 1.0); // diffuse surface reflectance
 vec3 WKa = vec3 (1.0, 1.0, 1.0); // fully reflect ambient light
 
 // fixed point light properties
-float specular_exponent = 10.0; // specular 'power'
+float specular_exponent = 32.0; // specular 'power'
 
 out vec4 fragment_colour; // final colour of surface
 void main () {
@@ -82,7 +82,7 @@ void main () {
 
 		// (3) specular intensity 
 
-		Is += Ls * Ks * pow( max( dot(reflect(-dist_light_eye, normal_eye), surf_view_eye), 0.0f), light_pow[i]);
+		Is += Ls * Ks * pow( max( dot(reflect(-dist_light_eye, normal_eye), surf_view_eye), 0.0f), 32);
 
 	}
 
