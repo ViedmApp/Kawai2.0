@@ -41,6 +41,7 @@ class Game
 		~Game();
 
 		void DetectCollision();
+		void detectDebuffs();
 		void init();
 		void main_loop();
 };

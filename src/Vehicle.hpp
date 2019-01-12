@@ -21,6 +21,8 @@ protected:
     bool turned;
 public:
 
+    bool isSlowed = false;
+    float cdCount = 0.0f;
     Vehicle(const char* path, GLuint shaderprog, btScalar masa, btVector3 startPosition,
         btQuaternion startRotation,btDiscreteDynamicsWorld* dynamicsWorld,
         const char* texture_path,int tag);
@@ -50,7 +52,7 @@ public:
     void setTurned(bool turn);    //void spawn();
     //void despawn(btDiscreteDynamicsWorld *world);
     int getTag();
-
+    void slowDown(int debuff_time);
     void setHealth(float vida);
     void setIsAlive(bool isAliv);
     void setBrake(bool brake);

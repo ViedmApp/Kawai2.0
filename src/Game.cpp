@@ -152,6 +152,10 @@ void Game::main_loop()
 
 
 		DetectCollision();
+
+		detectDebuffs();
+
+	
     	/*debug->setView(&view);
 		debug->setProj(&projection);
 		dynamicsWorld->debugDrawWorld();
@@ -178,11 +182,27 @@ void Game::DetectCollision()
  
         //if (!obA->getCollisionShape()->isNonMoving() && !obB->getCollisionShape()->isNonMoving()) {
             IsCollision = true;
-			if (mapa->trampa_P1 == obA->getUserPointer() and vehicle2 == obB->getUserPointer()) printf("Trampa ab  vs vehicle 2 collision\n");
-			else if (vehicle2 == obA->getUserPointer() and mapa->trampa_P1 == obB->getUserPointer()) printf("Trampa ba  vs vehicle 2 collision\n");
+			if (mapa->trampa_P1 == obA->getUserPointer() and vehicle2 == obB->getUserPointer())
+			{
+				vehicle2 -> slowDown(1);
+				mapa->trampa_P1 -> setPosition(100,100,100);
+			}
+			else if (vehicle2 == obA->getUserPointer() and mapa->trampa_P1 == obB->getUserPointer())
+			{
+				vehicle2 -> slowDown(1);
+				mapa->trampa_P1 -> setPosition(100,100,100);
+			}
 			
-			if (mapa->trampa_P2 == obA->getUserPointer() and vehicle1 == obB->getUserPointer()) printf("Trampa ab  vs vehicle 1 collision\n");
-			else if ( vehicle1 == obA->getUserPointer() and mapa->trampa_P2 == obB->getUserPointer()) printf("Trampa ba  vs vehicle 1 collision\n");
+			if (mapa->trampa_P2 == obA->getUserPointer() and vehicle1 == obB->getUserPointer())
+			{
+				vehicle1 -> slowDown(1);
+				mapa->trampa_P2 -> setPosition(100,100,100);
+			}
+			else if ( vehicle1 == obA->getUserPointer() and mapa->trampa_P2 == obB->getUserPointer())
+			{
+				vehicle1 -> slowDown(1);
+				mapa->trampa_P2 -> setPosition(100,100,100);
+			}
 			
 			//if () printf("vehicle 2 collision\n");
 			//printf("collision detected\n");
@@ -191,4 +211,24 @@ void Game::DetectCollision()
  
     IsCollision = false;
 
+}
+
+void Game::detectDebuffs()
+{
+	if (vehicle2->isSlowed and vehicle2 -> cdCount <= 0.01f)
+	{
+		vehicle2 -> isSlowed = false;
+	}
+	else
+	{
+		vehicle2 -> cdCount--;
+	}
+	if (vehicle1->isSlowed and vehicle1 -> cdCount <= 0.01f)
+	{
+		vehicle1 -> isSlowed = false;
+	}
+	else
+	{
+		vehicle1 -> cdCount--;
+	}
 }

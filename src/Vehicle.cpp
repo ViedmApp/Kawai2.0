@@ -110,6 +110,14 @@ void Vehicle::reverse()
     this->vehicle->applyEngineForce(-50, 1); //TODO:
 }
 
+void Vehicle::slowDown(int debuff_time)
+{
+    this -> isSlowed = true;
+    this->vehicle->applyEngineForce(-100, 0); //TODO: Param
+    this->vehicle->applyEngineForce(-100, 1); //TODO:
+    this -> cdCount = 60.0f * debuff_time;
+}
+
 void Vehicle::turnRight()
 {
     if (this->vehicle->getSteeringValue(0) > -0.45f && this->vehicle->getSteeringValue(1) > -0.45f)
