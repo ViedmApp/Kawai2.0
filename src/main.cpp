@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "SplashScreen.hpp"
 
 #pragma comment(lib, "irrKlang.lib") // link with irrKlang.dll
 
@@ -12,19 +13,23 @@ GLFWwindow* g_window = NULL;
 int main()
 {
 
+	SplashScreen* splash= new SplashScreen();
+
+	splash->main_loop();
 
 	Game* game = new Game();
+
+
 
 	//ISoundEngine* engine = createIrrKlangDevice();
 
 	//if(!engine)	return 0;
-	
+
 	//engine->play2D("multi/7. Run.wav", true);
-	
+
 	game -> main_loop();
-	
+
 	//engine->drop();
 
 	return 0;
 }
-

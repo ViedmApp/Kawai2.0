@@ -1,0 +1,13 @@
+# Blender MTL File: 'map_track_flat.blend'
+# Material Count: 1
+
+newmtl Material
+Ns 107.843137
+Ka 1.000000 1.000000 1.000000
+Kd 0.023280 0.023280 0.023280
+Ks 1.000000 0.819491 0.269560
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd /run/media/eduardo/Personal/Proyects/OpenGL/blender_meshes/Textures/map_track_flat_t.png
