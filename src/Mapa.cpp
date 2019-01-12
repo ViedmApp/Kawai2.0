@@ -149,11 +149,13 @@ void Mapa::crearTrampa(float x, float y, float z, int tag)
     {
         this->trampa_P1 -> setPosition(x,y,z);
         this->trampa_P1_exists = true;
+        this->trampa_P1 -> setCd(2);
     }
     
     if (tag == 2)
     {
         this->trampa_P2 -> setPosition(x,y,z);
         this->trampa_P2_exists = true;
+        this->trampa_P2 -> setCd(2);
     }
 }

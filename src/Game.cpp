@@ -154,6 +154,8 @@ void Game::main_loop()
 
 		detectDebuffs();
 
+		checkTrapsCd();
+
 		checkWinCondition();
 		
     	/*debug->setView(&view);
@@ -179,40 +181,36 @@ void Game::DetectCollision()
         btPersistentManifold* contactManifold = dynamicsWorld->getDispatcher()->getManifoldByIndexInternal(i);
         const btCollisionObject* obA = contactManifold->getBody0();
         const btCollisionObject* obB = contactManifold->getBody1();
- 
-        //if (!obA->getCollisionShape()->isNonMoving() && !obB->getCollisionShape()->isNonMoving()) {
-            IsCollision = true;
-			if (mapa->trampa_P1 == obA->getUserPointer() and vehicle2 == obB->getUserPointer())
-			{
-				vehicle2 -> slowDown(1);
-				mapa->trampa_P1 -> setPosition(100,100,100);
-				win_P2 = true;
-			}
-			else if (vehicle2 == obA->getUserPointer() and mapa->trampa_P1 == obB->getUserPointer())
-			{
-				vehicle2 -> slowDown(1);
-				mapa->trampa_P1 -> setPosition(100,100,100);
-			}
-			
-			if (mapa->trampa_P2 == obA->getUserPointer() and vehicle1 == obB->getUserPointer())
-			{
-				vehicle1 -> slowDown(1);
-				mapa->trampa_P2 -> setPosition(100,100,100);
-				win_P1 = true;
-			}
-			else if ( vehicle1 == obA->getUserPointer() and mapa->trampa_P2 == obB->getUserPointer())
-			{
-				vehicle1 -> slowDown(1);
-				mapa->trampa_P2 -> setPosition(100,100,100);
-			}
-			
-			//if () printf("vehicle 2 collision\n");
-			//printf("collision detected\n");
-        //}
+		if (mapa->trampa_P1 == obA->getUserPointer() and vehicle2 == obB->getUserPointer())
+		{
+			vehicle2 -> slowDown(1);
+			mapa->trampa_P1 -> setPosition(100,100,100);
+			mapa -> trampa_P1_exists = false;
+			win_P2 = true;
+		}
+		else if (vehicle2 == obA->getUserPointer() and mapa->trampa_P1 == obB->getUserPointer())
+		{
+			vehicle2 -> slowDown(1);
+			mapa->trampa_P1 -> setPosition(100,100,100);
+			mapa -> trampa_P1_exists = false;
+			win_P2 = true;
+		}
+		
+		if (mapa->trampa_P2 == obA->getUserPointer() and vehicle1 == obB->getUserPointer())
+		{
+			vehicle1 -> slowDown(1);
+			mapa->trampa_P2 -> setPosition(100,100,100);
+			mapa -> trampa_P2_exists = false;
+			win_P1 = true;
+		}
+		else if ( vehicle1 == obA->getUserPointer() and mapa->trampa_P2 == obB->getUserPointer())
+		{
+			vehicle1 -> slowDown(1);
+			mapa->trampa_P2 -> setPosition(100,100,100);
+			mapa -> trampa_P2_exists = false;
+			win_P1 = true;
+		}
     }
- 
-    IsCollision = false;
-
 }
 
 void Game::detectDebuffs()
@@ -258,5 +256,17 @@ void Game::checkWinCondition()
 			printf("Player 2 wins\n");
 		}
 		glfwSetWindowShouldClose(g_window, true);
+	}
+}
+
+void Game::checkTrapsCd()
+{
+	if (mapa->trampa_P1->cdCount>0.0f)
+	{
+		mapa->trampa_P1->cdCount--;	
+	}
+	if (mapa->trampa_P2->cdCount>0.0f)
+	{
+		mapa->trampa_P2->cdCount--;	
 	}
 }

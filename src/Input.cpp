@@ -37,7 +37,7 @@ void Input::initialiceInput(){
     firstPlayer -> reverse();
   if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
     firstPlayer -> reverse();
-  if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS and !trampa1)
+  if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS and !trampa1 and mapa -> trampa_P1 -> cdCount <= 0.0f)
   {
     mapa -> crearTrampa(firstPlayer->getX(),firstPlayer->getY(),firstPlayer->getZ(),1);
     trampa1 = true;
@@ -62,7 +62,7 @@ void Input::initialiceInput(){
     secondPlayer -> updateTurn();
   if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
     secondPlayer -> reverse();
-  if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS and !trampa2)
+  if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS and !trampa2 and mapa -> trampa_P2 -> cdCount <= 0.0f)
   {
     mapa -> crearTrampa(secondPlayer->getX(),secondPlayer->getY(),secondPlayer->getZ(),2);
     trampa2 = true;

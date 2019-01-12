@@ -46,6 +46,7 @@ class Game
 		void DetectCollision();
 		void detectDebuffs();
 		void checkWinCondition();
+		void checkTrapsCd();
 		void init();
 		void main_loop();
 };

@@ -10,3 +10,7 @@ Trampa::~Trampa()
 {
 
 }
+void Trampa::setCd(float cd)
+{
+	this->cdCount = 60.0f*cd;
+}
