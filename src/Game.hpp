@@ -29,6 +29,9 @@ class Game
 		Input* input;
 		GLDebugDrawer* debug;
 		Mapa* mapa;
+		
+		//Collision
+		bool IsCollision;
 
 
 		
@@ -36,6 +39,8 @@ class Game
 	public:
 		Game();
 		~Game();
+
+		void DetectCollision();
 		void init();
 		void main_loop();
 };

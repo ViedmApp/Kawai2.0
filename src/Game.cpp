@@ -148,6 +148,8 @@ void Game::main_loop()
     	vehicle2->draw(model_mat_location);
 		mapa -> draw(model_mat_location);
 
+
+		DetectCollision();
 	   
     	/*debug->setView(&view);
 		debug->setProj(&projection);
@@ -161,4 +163,27 @@ void Game::main_loop()
 	}
 	
 	glfwTerminate();
+}
+
+void Game::DetectCollision()
+{
+	int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
+	printf("NumeroManifolds %d\n",numManifolds);
+	for (int i = 0; i < numManifolds; i++)
+    {
+        btPersistentManifold* contactManifold = dynamicsWorld->getDispatcher()->getManifoldByIndexInternal(i);
+        const btCollisionObject* obA = contactManifold->getBody0();
+        const btCollisionObject* obB = contactManifold->getBody1();
+ 
+        if (!obA->getCollisionShape()->isNonMoving() && !obB->getCollisionShape()->isNonMoving()) {
+            IsCollision = true;
+			if (vehicle1 == obA->getUserPointer()) printf("vehicle 1 collision\n");
+			if (vehicle2 == obB->getUserPointer()) printf("vehicle 2 collision\n");
+			//printf("collision detected\n");
+            return;
+        }
+    }
+ 
+    IsCollision = false;
+
 }

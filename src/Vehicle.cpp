@@ -38,20 +38,21 @@ void Vehicle::initialize()
     btScalar suspensionRestLength(0.2f);                                                                                                                 //TODO: PARAM
     btScalar wheelRadius(0.790165f);
 
-    this -> getVehicle() -> addWheel(btVector3(-1.45459f, -0.777563f,2.2f), wheelDirection, wheelAxis, suspensionRestLength, wheelRadius, *tuning, false);  //TODO: PARAM
-    this -> getVehicle() -> addWheel(btVector3(1.45459f, -0.777563, 2.2f), wheelDirection, wheelAxis, suspensionRestLength, wheelRadius, *tuning, false); //TODO: PARAM
+    this -> getVehicle() -> addWheel(btVector3(-1.31f, -1.f,2.2f), wheelDirection, wheelAxis, suspensionRestLength, wheelRadius, *tuning, false);  //TODO: PARAM
+    this -> getVehicle() -> addWheel(btVector3(1.31f, -1.f, 2.2f), wheelDirection, wheelAxis, suspensionRestLength, wheelRadius, *tuning, false); //TODO: PARAM
 
                                                                                                                         //TOCO: PARAM
-    this -> getVehicle() -> addWheel(btVector3(-1.45459f, -0.777563, -2.87147), wheelDirection, wheelAxis, suspensionRestLength, wheelRadius, *tuning, true);   //TODO: PARAM
-    this -> getVehicle() -> addWheel(btVector3(1.45459, -0.777563,-2.827147f), wheelDirection, wheelAxis, suspensionRestLength, wheelRadius, *tuning, true);    //TODO: PARAM
+    this -> getVehicle() -> addWheel(btVector3(-1.36640f, -1, -3.f), wheelDirection, wheelAxis, suspensionRestLength, wheelRadius, *tuning, true);   //TODO: PARAM
+    this -> getVehicle() -> addWheel(btVector3(1.36640, -1,-3.f), wheelDirection, wheelAxis, suspensionRestLength, wheelRadius, *tuning, true);    //TODO: PARAM
 
 
     for (int i = 0; i < this -> getVehicle()-> getNumWheels(); i++)
     {
         btWheelInfo &wheel = this -> getVehicle() -> getWheelInfo(i);
-        //wheel.m_wheelsDampingRelaxation = 1.7f;    //TODO: PARAM
-        //wheel.m_wheelsDampingCompression = -1.7f;   //TODO: PARAM
-        wheel.m_frictionSlip = btScalar(10000.); //TODO: PARAM
+        wheel.m_wheelsDampingRelaxation = 2.5f;    //TODO: PARAM
+        wheel.m_wheelsDampingCompression = 2.8f;   //TODO: PARAM
+        wheel.m_suspensionStiffness = 8.88f;
+        wheel.m_frictionSlip = btScalar(1.5); //TODO: PARAM
         wheel.m_rollInfluence = btScalar(0.f);   //TODO: PARAM
         wheel.m_maxSuspensionTravelCm = 150.f;   //TODO: PARAM
     }
