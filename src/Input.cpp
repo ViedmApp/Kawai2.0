@@ -37,6 +37,13 @@ void Input::initialiceInput(){
     firstPlayer -> reverse();
   if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
     firstPlayer -> reverse();
+  if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS and !bala1 and firstPlayer -> firerate <=0.0f){
+     firstPlayer -> shootBullet();
+     bala1 = true;
+  }
+  else if (glfwGetKey(window, GLFW_KEY_O) == GLFW_RELEASE and bala1){
+    bala1=false;
+  }
   if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS and !trampa1 and mapa -> trampa_P1 -> cdCount <= 0.0f)
   {
     mapa -> crearTrampa(firstPlayer->getX(),firstPlayer->getY(),firstPlayer->getZ(),1);
@@ -70,6 +77,13 @@ void Input::initialiceInput(){
   else if(glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE and trampa2)
   {
     trampa2 = false;
+  }
+  if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS and !bala2 and secondPlayer -> firerate <=0.0f){
+     secondPlayer -> shootBullet();
+     bala2 = true;
+  }
+  else if (glfwGetKey(window, GLFW_KEY_R) == GLFW_RELEASE and bala2){
+    bala2=false;
   }
 
     

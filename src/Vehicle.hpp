@@ -20,10 +20,12 @@ protected:
     int tag;
     bool turned;
 public:
-
+    GameObject* bala;
+    bool existBala= false;
     bool isSlowed = false;
     float cdCount = 0.0f;
     float self_timer = 0.0f;
+    float firerate = 0.0f;
     Vehicle(const char* path, GLuint shaderprog, btScalar masa, btVector3 startPosition,
         btQuaternion startRotation,btDiscreteDynamicsWorld* dynamicsWorld,
         const char* texture_path,int tag);
@@ -44,16 +46,17 @@ public:
     btRaycastVehicle* getVehicle();
     void accelerate();
     void brake();
+    void noBrake();
     void reverse();
     void turnLeft();
     void turnRight();
     void updatePhysics();
     void updateTurn();
-    void fire();
+    void shootBullet();
     void setTurned(bool turn);    //void spawn();
     //void despawn(btDiscreteDynamicsWorld *world);
     int getTag();
-    void slowDown(int debuff_time);
+    void slowDown(float debuff_time);
     void setHealth(float vida);
     void setIsAlive(bool isAliv);
     void setBrake(bool brake);

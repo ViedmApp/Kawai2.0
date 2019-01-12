@@ -382,6 +382,7 @@ void GameObject::setPosition(float x,float y,float z)
 }
 
 
+
 void GameObject::draw(GLuint model_mat_location){
     /*
     btTransform trans;

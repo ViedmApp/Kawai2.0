@@ -139,6 +139,8 @@ void Game::main_loop()
         vehicle1->draw(model_mat_location);
     	vehicle2->draw(model_mat_location);
 		mapa -> draw(model_mat_location);
+		vehicle1->bala->draw(model_mat_location);
+		vehicle2->bala->draw(model_mat_location);
 
         glViewport (g_gl_width/2, 0, g_gl_width/2, g_gl_height);
         projection2 = camara2->getPerspectiva();
@@ -148,13 +150,14 @@ void Game::main_loop()
     	vehicle1->draw(model_mat_location);
     	vehicle2->draw(model_mat_location);
 		mapa -> draw(model_mat_location);
-
+		vehicle1->bala->draw(model_mat_location);
+		vehicle2->bala->draw(model_mat_location);
 
 		DetectCollision();
 
 		detectDebuffs();
 
-		checkTrapsCd();
+		checkCds();
 
 		checkWinCondition();
 		
@@ -183,14 +186,14 @@ void Game::DetectCollision()
         const btCollisionObject* obB = contactManifold->getBody1();
 		if (mapa->trampa_P1 == obA->getUserPointer() and vehicle2 == obB->getUserPointer())
 		{
-			vehicle2 -> slowDown(1);
+			vehicle2 -> slowDown(1.5f);
 			mapa->trampa_P1 -> setPosition(100,100,100);
 			mapa -> trampa_P1_exists = false;
 			win_P2 = true;
 		}
 		else if (vehicle2 == obA->getUserPointer() and mapa->trampa_P1 == obB->getUserPointer())
 		{
-			vehicle2 -> slowDown(1);
+			vehicle2 -> slowDown(1.5f);
 			mapa->trampa_P1 -> setPosition(100,100,100);
 			mapa -> trampa_P1_exists = false;
 			win_P2 = true;
@@ -198,18 +201,28 @@ void Game::DetectCollision()
 		
 		if (mapa->trampa_P2 == obA->getUserPointer() and vehicle1 == obB->getUserPointer())
 		{
-			vehicle1 -> slowDown(1);
+			vehicle1 -> slowDown(1.5f);
 			mapa->trampa_P2 -> setPosition(100,100,100);
 			mapa -> trampa_P2_exists = false;
 			win_P1 = true;
 		}
 		else if ( vehicle1 == obA->getUserPointer() and mapa->trampa_P2 == obB->getUserPointer())
 		{
-			vehicle1 -> slowDown(1);
+			vehicle1 -> slowDown(1.5f);
 			mapa->trampa_P2 -> setPosition(100,100,100);
 			mapa -> trampa_P2_exists = false;
 			win_P1 = true;
 		}
+		if (vehicle1->bala == obA->getUserPointer() and vehicle2 == obB->getUserPointer())
+        {
+			vehicle2 -> slowDown(0.5f);
+			vehicle1-> bala->setPosition(100,100,100);
+        }
+        else if (vehicle2 == obA->getUserPointer() and vehicle1->bala == obB->getUserPointer())
+        {
+        	vehicle2 -> slowDown(0.5f);
+        	vehicle1->bala->setPosition(100,100,100);
+        }
     }
 }
 
@@ -218,6 +231,7 @@ void Game::detectDebuffs()
 	if (vehicle2->isSlowed and vehicle2 -> cdCount <= 0.01f)
 	{
 		vehicle2 -> isSlowed = false;
+		vehicle2 -> noBrake();
 	}
 	else
 	{
@@ -226,6 +240,7 @@ void Game::detectDebuffs()
 	if (vehicle1->isSlowed and vehicle1 -> cdCount <= 0.01f)
 	{
 		vehicle1 -> isSlowed = false;
+		vehicle1 -> noBrake();
 	}
 	else
 	{
@@ -259,7 +274,7 @@ void Game::checkWinCondition()
 	}
 }
 
-void Game::checkTrapsCd()
+void Game::checkCds()
 {
 	if (mapa->trampa_P1->cdCount>0.0f)
 	{
@@ -268,5 +283,13 @@ void Game::checkTrapsCd()
 	if (mapa->trampa_P2->cdCount>0.0f)
 	{
 		mapa->trampa_P2->cdCount--;	
+	}
+	if (vehicle1 -> firerate >0.0f)
+	{
+		vehicle1 -> firerate--;
+	}
+	if (vehicle2 -> firerate >0.0f)
+	{
+		vehicle2 -> firerate--;
 	}
 }
