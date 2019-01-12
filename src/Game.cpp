@@ -90,9 +90,9 @@ void Game::init()
 	this->mapa = new Mapa(dynamicsWorld,shader_programme);
 
 	this->vehicle1 = new Vehicle((char*)"mallas/ae86-t.obj",shader_programme,btScalar(25),
-		mapa -> getP1StartPosition(),btQuaternion(PI/2,1,0),dynamicsWorld,(char*)"textures/ae86_t2.png");
+		mapa -> getP1StartPosition(),btQuaternion(PI/2,1,0),dynamicsWorld,(char*)"textures/ae86_t2.png", 1);
 	this->vehicle2 = new Vehicle((char*)"mallas/pika_ae86.obj",shader_programme,btScalar(25),
-		mapa -> getP2StartPosition(),btQuaternion(0,1,0,0),dynamicsWorld,(char*)"textures/pika_ae86_t.png");
+		mapa -> getP2StartPosition(),btQuaternion(0,1,0,0),dynamicsWorld,(char*)"textures/pika_ae86_t.png",2);
 
 	this->input=new Input(g_window,vehicle1,vehicle2,camara,camara2,mapa);
 	this->debug = new GLDebugDrawer();
@@ -105,6 +105,8 @@ void Game::init()
 	
 	vehicle1 -> updatePhysics();
 	vehicle2 -> updatePhysics();
+
+
 
 }
 
@@ -150,7 +152,6 @@ void Game::main_loop()
 
 
 		DetectCollision();
-	   
     	/*debug->setView(&view);
 		debug->setProj(&projection);
 		dynamicsWorld->debugDrawWorld();

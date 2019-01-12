@@ -3,18 +3,20 @@
 
 Vehicle::Vehicle(const char* path, GLuint shaderprog, btScalar masa, btVector3 startPosition,
     btQuaternion startRotation,btDiscreteDynamicsWorld* dynamicsWorld,
-    const char* texture_path)
+    const char* texture_path, int tag)
 : GameObject(path,shaderprog,masa,startPosition,startRotation,dynamicsWorld,texture_path)
 {
     initialize();
+    this -> tag = tag;
     assert(load_mesh((char*)"mallas/tire_20.obj",this -> wheel_vao,this -> wheel_num_verts));
 }
 
 Vehicle::Vehicle(const char* path, GLuint shaderprog, btScalar masa, btVector3 startPosition,
-    btQuaternion startRotation,btDiscreteDynamicsWorld* dynamicsWorld)
+    btQuaternion startRotation,btDiscreteDynamicsWorld* dynamicsWorld,int tag)
 : GameObject(path,shaderprog,masa,startPosition,startRotation,dynamicsWorld)
 {
     initialize();
+    this -> tag = tag;
     assert(load_mesh((char*)"mallas/tire_20.obj",this -> wheel_vao,this -> wheel_num_verts));
 }
 
@@ -136,6 +138,10 @@ void Vehicle::setTurned(bool turn){
     this->turned = turn;
 }
 
+int Vehicle::getTag()
+{
+    return this->tag;
+}
 
 void Vehicle::updatePhysics()
 {

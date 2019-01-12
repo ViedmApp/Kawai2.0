@@ -17,14 +17,15 @@ protected:
     btRaycastVehicle* vehicle;
     bool isAlive;
     float health;
+    int tag;
     bool turned;
 public:
 
     Vehicle(const char* path, GLuint shaderprog, btScalar masa, btVector3 startPosition,
         btQuaternion startRotation,btDiscreteDynamicsWorld* dynamicsWorld,
-        const char* texture_path);
+        const char* texture_path,int tag);
     Vehicle(const char* path, GLuint shaderprog, btScalar masa, btVector3 startPosition,
-        btQuaternion startRotation,btDiscreteDynamicsWorld* dynamicsWorld);
+        btQuaternion startRotation,btDiscreteDynamicsWorld* dynamicsWorld, int tag);
     ~Vehicle();
 
     btVector3 dirr;
@@ -48,6 +49,7 @@ public:
     void fire();
     void setTurned(bool turn);    //void spawn();
     //void despawn(btDiscreteDynamicsWorld *world);
+    int getTag();
 
     void setHealth(float vida);
     void setIsAlive(bool isAliv);
