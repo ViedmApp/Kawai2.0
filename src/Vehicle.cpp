@@ -29,7 +29,6 @@ void Vehicle::initialize()
     btRaycastVehicle::btVehicleTuning *tuning = new btRaycastVehicle::btVehicleTuning();
     btVehicleRaycaster *defvehicle = new btDefaultVehicleRaycaster(this->getWorld());
     this -> getRigidBody()->setActivationState(DISABLE_DEACTIVATION);
-    this -> getRigidBody()->setUserPointer(this);
     this -> setVehicle(new btRaycastVehicle(*tuning, this->getRigidBody(), defvehicle));
     this -> getVehicle()->setCoordinateSystem(0, 1, 2);
 
@@ -54,7 +53,7 @@ void Vehicle::initialize()
         wheel.m_wheelsDampingRelaxation = 2.5f;    //TODO: PARAM
         wheel.m_wheelsDampingCompression = 2.8f;   //TODO: PARAM
         wheel.m_suspensionStiffness = 8.88f;
-        wheel.m_frictionSlip = btScalar(1.5); //TODO: PARAM
+        wheel.m_frictionSlip = btScalar(1500); //TODO: PARAM
         wheel.m_rollInfluence = btScalar(0.f);   //TODO: PARAM
         wheel.m_maxSuspensionTravelCm = 150.f;   //TODO: PARAM
     }
@@ -113,7 +112,7 @@ void Vehicle::reverse()
 
 void Vehicle::turnRight()
 {
-    if (this->vehicle->getSteeringValue(0) > -0.4f && this->vehicle->getSteeringValue(1) > -0.4f)
+    if (this->vehicle->getSteeringValue(0) > -0.45f && this->vehicle->getSteeringValue(1) > -0.45f)
     {
         this->vehicle->setSteeringValue(this->vehicle->getSteeringValue(0) - 0.02f, 0); //TODO: Param
         this->vehicle->setSteeringValue(this->vehicle->getSteeringValue(1) - 0.02f, 1); //TODO: PARAM
@@ -122,7 +121,7 @@ void Vehicle::turnRight()
 }
 void Vehicle::turnLeft()
 {
-    if (this->vehicle->getSteeringValue(0) < 0.4f && this->vehicle->getSteeringValue(1) < 0.4f)
+    if (this->vehicle->getSteeringValue(0) < 0.45f && this->vehicle->getSteeringValue(1) < 0.45f)
     {
         this->vehicle->setSteeringValue(this->vehicle->getSteeringValue(0) + 0.02f, 0); //TODO: PARAM
         this->vehicle->setSteeringValue(this->vehicle->getSteeringValue(1) + 0.02f, 1); //TODO: PARAM

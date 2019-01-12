@@ -12,6 +12,9 @@ GameObject::GameObject(const char* path, GLuint shaderprog, btScalar masa, btVec
     this->mass = masa;
     this->position = startPosition;
     this->rotation = startRotation;
+    this->x = startPosition[0];
+    this->y = startPosition[1];
+    this->z = startPosition[2];
 
 
     btCollisionShape* coll;
@@ -36,6 +39,8 @@ GameObject::GameObject(const char* path, GLuint shaderprog, btScalar masa, btVec
     btRigidBody::btRigidBodyConstructionInfo rbInfo(this->mass, myMotionState, coll, localInertia);
     this->rigidBody = new btRigidBody(rbInfo);
     dynamicsWorld->addRigidBody(this->rigidBody);
+    this -> getRigidBody()->setUserPointer(this);
+
 
 }
 
@@ -330,10 +335,6 @@ btVector3 GameObject::getPosition()
     return this->position;
 }
 
-void GameObject::setPosition(btVector3 posicion)
-{
-    this->position = posicion;
-}
 
 btQuaternion GameObject::getRotation()
 {
@@ -366,6 +367,20 @@ btDiscreteDynamicsWorld* GameObject::getWorld()
 {
     return this->world;
 }
+
+void GameObject::setPosition(float x,float y,float z)
+{
+    this -> x = x;
+    this -> y = y;
+    this -> z = z;
+    btVector3 position(x,y,z);
+    btTransform aux;
+    aux.setIdentity();
+    aux.setOrigin(position);
+    btDefaultMotionState* state = new btDefaultMotionState(aux);
+    this -> getRigidBody() -> setMotionState(state);
+}
+
 
 void GameObject::draw(GLuint model_mat_location){
     /*
