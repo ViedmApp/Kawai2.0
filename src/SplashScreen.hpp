@@ -6,8 +6,6 @@
 #include "Mapa.hpp"
 #include "GLDebugDrawer.hpp"
 #define GL_LOG_FILE "log/gl.log"
-#define VERTEX_SHADER_FILE "shaders/test_vs.glsl"
-#define FRAGMENT_SHADER_FILE "shaders/test_fs.glsl"
 
 class SplashScreen
 {

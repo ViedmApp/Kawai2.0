@@ -52,7 +52,7 @@ void SplashScreen::init()
 	glViewport (0, 0, g_gl_width/2, g_gl_height);
 
 	this->shader_programme = create_programme_from_files (
-		VERTEX_SHADER_FILE, FRAGMENT_SHADER_FILE
+		"shaders/test_vs.glsl", "shaders/test_fs.glsl"
 	);
 
     this->projection = camara->getPerspectiva();

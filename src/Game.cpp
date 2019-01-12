@@ -106,6 +106,25 @@ void Game::init()
 	vehicle1 -> updatePhysics();
 	vehicle2 -> updatePhysics();
 
+	Light* lights_arr = new Light(shader_programme);
+	lights_arr->addLight(glm::vec3(100.0, -100.0, 100.0),
+		glm::vec3 (1.0, 0.0, 0.0),
+		glm::vec3 (0.9, 0.9, 0.9),
+		glm::vec3 (0.0, 0.0, 0.0),
+		glm::vec3 (1.0, 0.7, 0.7),
+		glm::vec3 (1.0, 1.0, 1.0),
+		glm::vec3 (1.0, 1.0, 1.0),50);
+
+		
+	lights_arr->addLight(glm::vec3(50.0, 60.0, 100.0),
+		glm::vec3 (0.0, 1.0, 0.0),
+		glm::vec3 (0.2, 0.2, 0.2),
+		glm::vec3 (0.0, 0.0, 0.0),
+		glm::vec3 (0.7, 0.2, 0.7),
+		glm::vec3 (1.0, 1.0, 1.0),
+		glm::vec3 (1.0, 1.0, 1.0),500);
+	
+	lights_arr->initLights();
 
 
 }
