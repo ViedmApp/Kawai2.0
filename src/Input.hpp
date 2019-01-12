@@ -15,7 +15,8 @@ float prevPlayerZ;
 float prevPlayer2X;
 float prevPlayer2Z;
 Mapa *mapa;
-bool trampa = false;
+bool trampa1 = false;
+bool trampa2 = false;
 
 
 public:

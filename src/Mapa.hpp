@@ -10,8 +10,6 @@ protected:
 	btVector3 p1_Start_Position;
 	btVector3 p2_Start_Position;
 	GameObject** mapa;
-	Trampa *trampa_P1;
-	Trampa *trampa_P2;
 	bool trampa_P1_exists = false;
 	bool trampa_P2_exists = false;
 	btDiscreteDynamicsWorld* dynamicsWorld;
@@ -20,6 +18,8 @@ protected:
 	int N;
 
 public:
+	Trampa *trampa_P1;
+	Trampa *trampa_P2;
     Mapa(btDiscreteDynamicsWorld* dynamicsWorld,GLuint shader_programme);
     ~Mapa();
     btVector3 checkpoints[8];

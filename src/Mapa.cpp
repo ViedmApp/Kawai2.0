@@ -19,7 +19,7 @@ void Mapa::init()
 {
     N = 24;
     int cont = 0;
-    p1_Start_Position = btVector3(80,1,170);
+    p1_Start_Position = btVector3(1,1,70);
     p2_Start_Position = btVector3(4,1,70);
     mapa = (GameObject**)malloc((N)*sizeof(GameObject));
     mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),

@@ -90,7 +90,7 @@ void Game::init()
 	this->mapa = new Mapa(dynamicsWorld,shader_programme);
 
 	this->vehicle1 = new Vehicle((char*)"mallas/ae86-t.obj",shader_programme,btScalar(25),
-		mapa -> getP1StartPosition(),btQuaternion(PI/2,1,0),dynamicsWorld,(char*)"textures/ae86_t2.png", 1);
+		mapa -> getP1StartPosition(),btQuaternion(0,1,0,0),dynamicsWorld,(char*)"textures/ae86_t2.png", 1);
 	this->vehicle2 = new Vehicle((char*)"mallas/pika_ae86.obj",shader_programme,btScalar(25),
 		mapa -> getP2StartPosition(),btQuaternion(0,1,0,0),dynamicsWorld,(char*)"textures/pika_ae86_t.png",2);
 
@@ -176,13 +176,17 @@ void Game::DetectCollision()
         const btCollisionObject* obA = contactManifold->getBody0();
         const btCollisionObject* obB = contactManifold->getBody1();
  
-        if (!obA->getCollisionShape()->isNonMoving() && !obB->getCollisionShape()->isNonMoving()) {
+        //if (!obA->getCollisionShape()->isNonMoving() && !obB->getCollisionShape()->isNonMoving()) {
             IsCollision = true;
-			if (vehicle1 == obA->getUserPointer()) printf("vehicle 1 collision\n");
-			if (vehicle2 == obB->getUserPointer()) printf("vehicle 2 collision\n");
+			if (mapa->trampa_P1 == obA->getUserPointer() and vehicle2 == obB->getUserPointer()) printf("Trampa ab  vs vehicle 2 collision\n");
+			else if (vehicle2 == obA->getUserPointer() and mapa->trampa_P1 == obB->getUserPointer()) printf("Trampa ba  vs vehicle 2 collision\n");
+			
+			if (mapa->trampa_P2 == obA->getUserPointer() and vehicle1 == obB->getUserPointer()) printf("Trampa ab  vs vehicle 1 collision\n");
+			else if ( vehicle1 == obA->getUserPointer() and mapa->trampa_P2 == obB->getUserPointer()) printf("Trampa ba  vs vehicle 1 collision\n");
+			
+			//if () printf("vehicle 2 collision\n");
 			//printf("collision detected\n");
-            return;
-        }
+        //}
     }
  
     IsCollision = false;
