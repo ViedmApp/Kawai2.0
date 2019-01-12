@@ -23,6 +23,7 @@ public:
 
     bool isSlowed = false;
     float cdCount = 0.0f;
+    float self_timer = 0.0f;
     Vehicle(const char* path, GLuint shaderprog, btScalar masa, btVector3 startPosition,
         btQuaternion startRotation,btDiscreteDynamicsWorld* dynamicsWorld,
         const char* texture_path,int tag);

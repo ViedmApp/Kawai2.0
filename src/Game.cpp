@@ -117,13 +117,12 @@ void Game::main_loop()
 	float lastFrame = 0.0f;
 	while (!glfwWindowShouldClose(g_window))
 	{
-
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         if (deltaTime < 0.016f)
             continue;
-
-        lastFrame = currentFrame;
+	    lastFrame = currentFrame;
+        this->timer++;
         dynamicsWorld->stepSimulation(1.f / 60.f, 10);
         input->initialiceInput();
 
@@ -155,7 +154,8 @@ void Game::main_loop()
 
 		detectDebuffs();
 
-	
+		checkWinCondition();
+		
     	/*debug->setView(&view);
 		debug->setProj(&projection);
 		dynamicsWorld->debugDrawWorld();
@@ -173,7 +173,7 @@ void Game::main_loop()
 void Game::DetectCollision()
 {
 	int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
-	printf("NumeroManifolds %d\n",numManifolds);
+	//printf("NumeroManifolds %d\n",numManifolds);
 	for (int i = 0; i < numManifolds; i++)
     {
         btPersistentManifold* contactManifold = dynamicsWorld->getDispatcher()->getManifoldByIndexInternal(i);
@@ -186,6 +186,7 @@ void Game::DetectCollision()
 			{
 				vehicle2 -> slowDown(1);
 				mapa->trampa_P1 -> setPosition(100,100,100);
+				win_P2 = true;
 			}
 			else if (vehicle2 == obA->getUserPointer() and mapa->trampa_P1 == obB->getUserPointer())
 			{
@@ -197,6 +198,7 @@ void Game::DetectCollision()
 			{
 				vehicle1 -> slowDown(1);
 				mapa->trampa_P2 -> setPosition(100,100,100);
+				win_P1 = true;
 			}
 			else if ( vehicle1 == obA->getUserPointer() and mapa->trampa_P2 == obB->getUserPointer())
 			{
@@ -230,5 +232,31 @@ void Game::detectDebuffs()
 	else
 	{
 		vehicle1 -> cdCount--;
+	}
+}
+
+void Game::checkWinCondition()
+{
+	if (win_P1 and vehicle1->self_timer == 0.0f)
+	{
+		vehicle1 -> self_timer = timer/60.0f;
+		printf("Player 1 reachs in %.3f seconds\n", timer/60.0f);
+	}
+	if (win_P2 and vehicle2->self_timer == 0.0f)
+	{
+		vehicle2 -> self_timer = timer/60.0f;
+		printf("Player 2 reachs in %.3f seconds\n", timer/60.0f);
+	}
+	if (win_P1 and win_P2)
+	{
+		if (vehicle1 -> self_timer < vehicle2 -> self_timer)
+		{
+			printf("Player 1 wins\n");
+		}
+		else
+		{
+			printf("Player 2 wins\n");
+		}
+		glfwSetWindowShouldClose(g_window, true);
 	}
 }
