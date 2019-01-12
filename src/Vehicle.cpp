@@ -9,6 +9,8 @@ Vehicle::Vehicle(const char* path, GLuint shaderprog, btScalar masa, btVector3 s
     initialize();
     this -> tag = tag;
     assert(load_mesh((char*)"mallas/tire_20.obj",this -> wheel_vao,this -> wheel_num_verts));
+    this->bala= new GameObject((char*)"mallas/ball.obj",shader_programme,btScalar(3.2),
+btVector3(100,100,100),btQuaternion(0,1,0,0),world, (char*)"mallas/background_1920.png");
 }
 
 Vehicle::Vehicle(const char* path, GLuint shaderprog, btScalar masa, btVector3 startPosition,
@@ -29,7 +31,6 @@ void Vehicle::initialize()
     btRaycastVehicle::btVehicleTuning *tuning = new btRaycastVehicle::btVehicleTuning();
     btVehicleRaycaster *defvehicle = new btDefaultVehicleRaycaster(this->getWorld());
     this -> getRigidBody()->setActivationState(DISABLE_DEACTIVATION);
-    this -> getRigidBody()->setUserPointer(this);
     this -> setVehicle(new btRaycastVehicle(*tuning, this->getRigidBody(), defvehicle));
     this -> getVehicle()->setCoordinateSystem(0, 1, 2);
 
@@ -54,7 +55,7 @@ void Vehicle::initialize()
         wheel.m_wheelsDampingRelaxation = 2.5f;    //TODO: PARAM
         wheel.m_wheelsDampingCompression = 2.8f;   //TODO: PARAM
         wheel.m_suspensionStiffness = 8.88f;
-        wheel.m_frictionSlip = btScalar(1.5); //TODO: PARAM
+        wheel.m_frictionSlip = btScalar(1500); //TODO: PARAM
         wheel.m_rollInfluence = btScalar(0.f);   //TODO: PARAM
         wheel.m_maxSuspensionTravelCm = 150.f;   //TODO: PARAM
     }
@@ -91,18 +92,26 @@ void Vehicle::setVehicle(btRaycastVehicle* vehicle){
 
 void Vehicle::accelerate()
 {
- if (vehicle->getCurrentSpeedKmHour() < 150.f)    {
-        this->vehicle->applyEngineForce(40.f, 0); //TODO: Param
-        this->vehicle->applyEngineForce(40.f, 1);
+ if (vehicle->getCurrentSpeedKmHour() < 120.f)    {
+        this->vehicle->applyEngineForce(60.f, 0); //TODO: Param
+        this->vehicle->applyEngineForce(60.f, 1);
     }
 }
 void Vehicle::brake()
 {
-    this->vehicle->setBrake(btScalar(1.15), 0); //TODO: PARAM
-    this->vehicle->setBrake(btScalar(1.15), 1); //TODO: PARAM
-    this->vehicle->setBrake(btScalar(1.15), 2); //TODO: PARAM
-    this->vehicle->setBrake(btScalar(1.15), 3); //TODO: PARAM
+    this->vehicle->setBrake(btScalar(3), 0); //TODO: PARAM
+    this->vehicle->setBrake(btScalar(3), 1); //TODO: PARAM
+    this->vehicle->setBrake(btScalar(3), 2); //TODO: PARAM
+    this->vehicle->setBrake(btScalar(3), 3); //TODO: PARAM
 
+}
+
+void Vehicle::noBrake()
+{
+    this->vehicle->setBrake(btScalar(0), 0); //TODO: PARAM
+    this->vehicle->setBrake(btScalar(0), 1); //TODO: PARAM
+    this->vehicle->setBrake(btScalar(0), 2); //TODO: PARAM
+    this->vehicle->setBrake(btScalar(0), 3); //TODO: PARAM
 }
 void Vehicle::reverse()
 {
@@ -111,9 +120,17 @@ void Vehicle::reverse()
     this->vehicle->applyEngineForce(-50, 1); //TODO:
 }
 
+void Vehicle::slowDown(float debuff_time)
+{
+    this -> isSlowed = true;
+    this->vehicle->applyEngineForce(-5000, 0); //TODO: Param
+    this->vehicle->applyEngineForce(-5000, 1); //TODO:
+    this -> cdCount = 60.0f * debuff_time + cdCount;
+}
+
 void Vehicle::turnRight()
 {
-    if (this->vehicle->getSteeringValue(0) > -0.4f && this->vehicle->getSteeringValue(1) > -0.4f)
+    if (this->vehicle->getSteeringValue(0) > -0.45f && this->vehicle->getSteeringValue(1) > -0.45f)
     {
         this->vehicle->setSteeringValue(this->vehicle->getSteeringValue(0) - 0.02f, 0); //TODO: Param
         this->vehicle->setSteeringValue(this->vehicle->getSteeringValue(1) - 0.02f, 1); //TODO: PARAM
@@ -122,7 +139,7 @@ void Vehicle::turnRight()
 }
 void Vehicle::turnLeft()
 {
-    if (this->vehicle->getSteeringValue(0) < 0.4f && this->vehicle->getSteeringValue(1) < 0.4f)
+    if (this->vehicle->getSteeringValue(0) < 0.45f && this->vehicle->getSteeringValue(1) < 0.45f)
     {
         this->vehicle->setSteeringValue(this->vehicle->getSteeringValue(0) + 0.02f, 0); //TODO: PARAM
         this->vehicle->setSteeringValue(this->vehicle->getSteeringValue(1) + 0.02f, 1); //TODO: PARAM
@@ -212,7 +229,31 @@ float Vehicle::getZ()
     return trans.getOrigin()[2];
 }
 
+void Vehicle::shootBullet(){ 
 
+        existBala = true;
+        bool en_movimiento = this->getRigidBody()->getLinearVelocity().norm() > 0.01;
+
+
+        if (en_movimiento){
+            btVector3 valores = this->getRigidBody()->getCenterOfMassPosition() + (this->getRigidBody()->getLinearVelocity().normalized() *4);
+            bala -> setPosition(valores[0],valores[1],valores[2]);
+        }
+        else {
+            btVector3 valores = this->getRigidBody()->getCenterOfMassPosition() + btVector3(1.5 ,0,0);
+            bala -> setPosition(valores[0],valores[1],valores[2]);
+
+        }
+
+
+        if (en_movimiento)
+            bala->getRigidBody()->setLinearVelocity(50 * this->getRigidBody()->getLinearVelocity().normalized());
+        else
+            bala->getRigidBody()->setLinearVelocity(btVector3(35, 0, 0));
+
+        bala->getRigidBody()->setGravity(btVector3(0,0,0));
+        firerate = 60.0f * 1.5f;
+}
 
 void Vehicle::draw(GLuint model_mat_location)
 {

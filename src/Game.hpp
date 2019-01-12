@@ -38,10 +38,16 @@ class Game
 		
 
 	public:
+		float timer = 0.0f;
+		bool win_P1 = false;
+		bool win_P2 = false;
 		Game();
 		~Game();
 
 		void DetectCollision();
+		void detectDebuffs();
+		void checkWinCondition();
+		void checkCds();
 		void init();
 		void main_loop();
 };

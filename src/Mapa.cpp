@@ -5,9 +5,9 @@
     this -> dynamicsWorld = dynamicsWorld;
     this -> shader_programme = shader_programme;
     this -> trampa_P1 = new Trampa((char*)"mallas/ball.obj",shader_programme,btScalar(0),
-        btVector3(100,100,100),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_border_t.png",100,100,100,1);
+        btVector3(100,100,100),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_border_t.png",1);
     this -> trampa_P2 = new Trampa((char*)"mallas/ball.obj",shader_programme,btScalar(0),
-        btVector3(100,100,100),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_border_t.png",100,100,100,2);
+        btVector3(100,100,100),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_border_t.png",2);
     init();
     }
     Mapa::~Mapa()
@@ -19,7 +19,7 @@ void Mapa::init()
 {
     N = 24;
     int cont = 0;
-    p1_Start_Position = btVector3(80,1,170);
+    p1_Start_Position = btVector3(1,1,70);
     p2_Start_Position = btVector3(4,1,70);
     mapa = (GameObject**)malloc((N)*sizeof(GameObject));
     mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),
@@ -149,11 +149,13 @@ void Mapa::crearTrampa(float x, float y, float z, int tag)
     {
         this->trampa_P1 -> setPosition(x,y,z);
         this->trampa_P1_exists = true;
+        this->trampa_P1 -> setCd(2);
     }
     
     if (tag == 2)
     {
         this->trampa_P2 -> setPosition(x,y,z);
         this->trampa_P2_exists = true;
+        this->trampa_P2 -> setCd(2);
     }
 }

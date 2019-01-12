@@ -90,7 +90,7 @@ void Game::init()
 	this->mapa = new Mapa(dynamicsWorld,shader_programme);
 
 	this->vehicle1 = new Vehicle((char*)"mallas/ae86-t.obj",shader_programme,btScalar(25),
-		mapa -> getP1StartPosition(),btQuaternion(PI/2,1,0),dynamicsWorld,(char*)"textures/ae86_t2.png", 1);
+		mapa -> getP1StartPosition(),btQuaternion(0,1,0,0),dynamicsWorld,(char*)"textures/ae86_t2.png", 1);
 	this->vehicle2 = new Vehicle((char*)"mallas/pika_ae86.obj",shader_programme,btScalar(25),
 		mapa -> getP2StartPosition(),btQuaternion(0,1,0,0),dynamicsWorld,(char*)"textures/pika_ae86_t.png",2);
 
@@ -136,13 +136,12 @@ void Game::main_loop()
 	float lastFrame = 0.0f;
 	while (!glfwWindowShouldClose(g_window))
 	{
-
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         if (deltaTime < 0.016f)
             continue;
-
-        lastFrame = currentFrame;
+	    lastFrame = currentFrame;
+        this->timer++;
         dynamicsWorld->stepSimulation(1.f / 60.f, 10);
         input->initialiceInput();
 
@@ -159,6 +158,8 @@ void Game::main_loop()
         vehicle1->draw(model_mat_location);
     	vehicle2->draw(model_mat_location);
 		mapa -> draw(model_mat_location);
+		vehicle1->bala->draw(model_mat_location);
+		vehicle2->bala->draw(model_mat_location);
 
         glViewport (g_gl_width/2, 0, g_gl_width/2, g_gl_height);
         projection2 = camara2->getPerspectiva();
@@ -168,9 +169,17 @@ void Game::main_loop()
     	vehicle1->draw(model_mat_location);
     	vehicle2->draw(model_mat_location);
 		mapa -> draw(model_mat_location);
-
+		vehicle1->bala->draw(model_mat_location);
+		vehicle2->bala->draw(model_mat_location);
 
 		DetectCollision();
+
+		detectDebuffs();
+
+		checkCds();
+
+		checkWinCondition();
+		
     	/*debug->setView(&view);
 		debug->setProj(&projection);
 		dynamicsWorld->debugDrawWorld();
@@ -188,22 +197,118 @@ void Game::main_loop()
 void Game::DetectCollision()
 {
 	int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
-	printf("NumeroManifolds %d\n",numManifolds);
+	//printf("NumeroManifolds %d\n",numManifolds);
 	for (int i = 0; i < numManifolds; i++)
     {
         btPersistentManifold* contactManifold = dynamicsWorld->getDispatcher()->getManifoldByIndexInternal(i);
         const btCollisionObject* obA = contactManifold->getBody0();
         const btCollisionObject* obB = contactManifold->getBody1();
- 
-        if (!obA->getCollisionShape()->isNonMoving() && !obB->getCollisionShape()->isNonMoving()) {
-            IsCollision = true;
-			if (vehicle1 == obA->getUserPointer()) printf("vehicle 1 collision\n");
-			if (vehicle2 == obB->getUserPointer()) printf("vehicle 2 collision\n");
-			//printf("collision detected\n");
-            return;
+		if (mapa->trampa_P1 == obA->getUserPointer() and vehicle2 == obB->getUserPointer())
+		{
+			vehicle2 -> slowDown(1.5f);
+			mapa->trampa_P1 -> setPosition(100,100,100);
+			mapa -> trampa_P1_exists = false;
+			win_P2 = true;
+		}
+		else if (vehicle2 == obA->getUserPointer() and mapa->trampa_P1 == obB->getUserPointer())
+		{
+			vehicle2 -> slowDown(1.5f);
+			mapa->trampa_P1 -> setPosition(100,100,100);
+			mapa -> trampa_P1_exists = false;
+			win_P2 = true;
+		}
+		
+		if (mapa->trampa_P2 == obA->getUserPointer() and vehicle1 == obB->getUserPointer())
+		{
+			vehicle1 -> slowDown(1.5f);
+			mapa->trampa_P2 -> setPosition(100,100,100);
+			mapa -> trampa_P2_exists = false;
+			win_P1 = true;
+		}
+		else if ( vehicle1 == obA->getUserPointer() and mapa->trampa_P2 == obB->getUserPointer())
+		{
+			vehicle1 -> slowDown(1.5f);
+			mapa->trampa_P2 -> setPosition(100,100,100);
+			mapa -> trampa_P2_exists = false;
+			win_P1 = true;
+		}
+		if (vehicle1->bala == obA->getUserPointer() and vehicle2 == obB->getUserPointer())
+        {
+			vehicle2 -> slowDown(0.5f);
+			vehicle1-> bala->setPosition(100,100,100);
+        }
+        else if (vehicle2 == obA->getUserPointer() and vehicle1->bala == obB->getUserPointer())
+        {
+        	vehicle2 -> slowDown(0.5f);
+        	vehicle1->bala->setPosition(100,100,100);
         }
     }
- 
-    IsCollision = false;
+}
 
+void Game::detectDebuffs()
+{
+	if (vehicle2->isSlowed and vehicle2 -> cdCount <= 0.01f)
+	{
+		vehicle2 -> isSlowed = false;
+		vehicle2 -> noBrake();
+	}
+	else
+	{
+		vehicle2 -> cdCount--;
+	}
+	if (vehicle1->isSlowed and vehicle1 -> cdCount <= 0.01f)
+	{
+		vehicle1 -> isSlowed = false;
+		vehicle1 -> noBrake();
+	}
+	else
+	{
+		vehicle1 -> cdCount--;
+	}
+}
+
+void Game::checkWinCondition()
+{
+	if (win_P1 and vehicle1->self_timer == 0.0f)
+	{
+		vehicle1 -> self_timer = timer/60.0f;
+		printf("Player 1 reachs in %.3f seconds\n", timer/60.0f);
+	}
+	if (win_P2 and vehicle2->self_timer == 0.0f)
+	{
+		vehicle2 -> self_timer = timer/60.0f;
+		printf("Player 2 reachs in %.3f seconds\n", timer/60.0f);
+	}
+	if (win_P1 and win_P2)
+	{
+		if (vehicle1 -> self_timer < vehicle2 -> self_timer)
+		{
+			printf("Player 1 wins\n");
+		}
+		else
+		{
+			printf("Player 2 wins\n");
+		}
+		glfwSetWindowShouldClose(g_window, true);
+	}
+}
+
+void Game::checkCds()
+{
+	if (mapa->trampa_P1->cdCount>0.0f)
+	{
+		mapa->trampa_P1->cdCount--;	
+	}
+	if (mapa->trampa_P2->cdCount>0.0f)
+	{
+		mapa->trampa_P2->cdCount--;	
+	}
+	if (vehicle1 -> firerate >0.0f)
+	{
+		vehicle1 -> firerate--;
+	}
+	if (vehicle2 -> firerate >0.0f)
+	{
+		vehicle2 -> firerate--;
+	}
 }

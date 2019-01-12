@@ -8,6 +8,7 @@ protected:
     GLuint vao;
     GLuint ebo;
     btVector3 position;
+    float x,y,z;
     btDiscreteDynamicsWorld* world;
     btQuaternion rotation;
     btScalar mass;
@@ -49,7 +50,7 @@ public:
     btScalar getMass();
     void setMass(btScalar masa);
     btVector3 getPosition();
-    void setPosition(btVector3 posicion);
+    void setPosition(float x, float y, float z);
     btQuaternion getRotation();
     void setRotation(btQuaternion rotacion);
     btRigidBody* getRigidBody();

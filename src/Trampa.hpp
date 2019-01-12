@@ -6,21 +6,16 @@
 class Trampa: public GameObject{
 
 protected:
-	float x,y,z;
 	int tag;
-	int N;
 
 public:
+	float cdCount = 0.0f;
     Trampa(const char* path, GLuint shaderprog, btScalar masa, btVector3 startPosition,
     btQuaternion startRotation,btDiscreteDynamicsWorld* dynamicsWorld,
-    const char* texture_path,float x,float y, float z,int tag);
+    const char* texture_path,int tag);
     ~Trampa();
-    void draw(GLuint model_mat_location);
-    float getX();
-    float getY();
-    float getZ();
     int getTag();
-    void setPosition(float x,float y,float z);
+    void setCd(float cd);
 };
 
 

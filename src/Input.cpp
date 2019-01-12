@@ -21,7 +21,7 @@ void Input::initialiceInput(){
   if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
       glfwSetWindowShouldClose(window, true);
 
-  if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+  if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS and !firstPlayer->isSlowed)
     firstPlayer ->accelerate();
   if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_RELEASE)
     firstPlayer -> updatePhysics();
@@ -37,18 +37,25 @@ void Input::initialiceInput(){
     firstPlayer -> reverse();
   if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
     firstPlayer -> reverse();
-  if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS and !trampa)
+  if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS and !bala1 and firstPlayer -> firerate <=0.0f){
+     firstPlayer -> shootBullet();
+     bala1 = true;
+  }
+  else if (glfwGetKey(window, GLFW_KEY_O) == GLFW_RELEASE and bala1){
+    bala1=false;
+  }
+  if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS and !trampa1 and mapa -> trampa_P1 -> cdCount <= 0.0f)
   {
     mapa -> crearTrampa(firstPlayer->getX(),firstPlayer->getY(),firstPlayer->getZ(),1);
-    trampa = true;
+    trampa1 = true;
   }
-  else if(glfwGetKey(window, GLFW_KEY_P) == GLFW_RELEASE and trampa)
+  else if(glfwGetKey(window, GLFW_KEY_P) == GLFW_RELEASE and trampa1)
   {
-    trampa = false;
+    trampa1 = false;
   }
 
 
-  if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
+  if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS and !secondPlayer->isSlowed)
       secondPlayer ->accelerate();
   if (glfwGetKey(window, GLFW_KEY_U) == GLFW_RELEASE)
       secondPlayer -> updatePhysics();
@@ -62,6 +69,22 @@ void Input::initialiceInput(){
     secondPlayer -> updateTurn();
   if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
     secondPlayer -> reverse();
+  if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS and !trampa2 and mapa -> trampa_P2 -> cdCount <= 0.0f)
+  {
+    mapa -> crearTrampa(secondPlayer->getX(),secondPlayer->getY(),secondPlayer->getZ(),2);
+    trampa2 = true;
+  }
+  else if(glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE and trampa2)
+  {
+    trampa2 = false;
+  }
+  if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS and !bala2 and secondPlayer -> firerate <=0.0f){
+     secondPlayer -> shootBullet();
+     bala2 = true;
+  }
+  else if (glfwGetKey(window, GLFW_KEY_R) == GLFW_RELEASE and bala2){
+    bala2=false;
+  }
 
     
 

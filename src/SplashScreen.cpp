@@ -18,10 +18,10 @@ void SplashScreen::init()
 
 
 
-	glm::vec3 cameraPos   = glm::vec3(3.0f, -2.0f, 30.0f);
+	glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f, -0.0f);
 	glm::vec3 cameraFront = glm::vec3(0.0f, -1.0f, -1.0f);
 	glm::vec3 cameraLook = glm::vec3(0.0f,0.0f,0.0f);
-	glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f, 0.0f);
+	glm::vec3 cameraUp    = glm::vec3(0.0f, -1.0f, 0.0f);
 
 //	SoundEngine->play2D("multi/encendido_auto.ogg",GL_FALSE);
 
@@ -76,8 +76,8 @@ void SplashScreen::init()
 
 	this->dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
 	dynamicsWorld->setGravity(btVector3(0, -10, 0));
-	this->pantalla= new GameObject((char*)"mallas/kawaii_background.obj",shader_programme,btScalar(0),
-			btVector3(3,-2,10),btQuaternion(0,1,0,0),dynamicsWorld, (char*)"mallas/background_kawaii.jpg");
+	this->pantalla= new GameObject((char*)"mallas/menu.obj",shader_programme,btScalar(0),
+			btVector3(0,0,0),btQuaternion(0,1,0,0),dynamicsWorld, (char*)"mallas/background.png");
 	this->debug = new GLDebugDrawer();
 
 
