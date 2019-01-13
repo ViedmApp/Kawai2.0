@@ -338,7 +338,9 @@ btVector3 GameObject::getPosition()
 
 btQuaternion GameObject::getRotation()
 {
-    return this->rotation;
+    btTransform trans;
+    this -> getRigidBody()->getMotionState()->getWorldTransform(trans);
+    return trans.getRotation();
 }
 void GameObject::setRotation(btQuaternion rotacion)
 {

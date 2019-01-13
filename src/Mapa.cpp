@@ -18,7 +18,7 @@
 void Mapa::init()
 {
     srand (time(NULL));
-    int map = /*rand()%2 +1;*/ 1;
+    int map = /*rand()%2 +1;*/ 2;
     if (map == 1)
     {
         N = 33;
@@ -29,7 +29,7 @@ void Mapa::init()
         mapa[cont++] = new GameObject((char*)"mallas/grass_bg.obj",shader_programme,btScalar(0),
             btVector3( 0,-7.9,80),btQuaternion(0,0,0),dynamicsWorld, (char*)"textures/pastito.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/start.obj",shader_programme,btScalar(0),
-            btVector3( 0,-12,115),btQuaternion(0,0,0),dynamicsWorld, (char*)"textures/start.png");
+            btVector3( 0,-11,118.15),btQuaternion(0,0,0),dynamicsWorld, (char*)"textures/start.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
             btVector3( 0,-10,70),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),
@@ -242,11 +242,15 @@ void Mapa::init()
     }
     else if (map == 2)
     {
-        N = 3;
+        N = 7;
         int cont = 0;
         p1_Start_Position = btVector3(-3,1,90);
         p2_Start_Position = btVector3(4,1,90);
         mapa = (GameObject**)malloc(((N*3)+2)*sizeof(GameObject));
+        mapa[cont++] = new GameObject((char*)"mallas/grass_bg.obj",shader_programme,btScalar(0),
+            btVector3( 0,-7.9,80),btQuaternion(0,0,0),dynamicsWorld, (char*)"textures/pastito.jpg");
+        mapa[cont++] = new GameObject((char*)"mallas/start.obj",shader_programme,btScalar(0),
+            btVector3( 0,-11,118.15),btQuaternion(0,0,0),dynamicsWorld, (char*)"textures/start.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
             btVector3( 0,-10,70),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),
@@ -255,6 +259,20 @@ void Mapa::init()
             btVector3( -55,-10,15),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),
             btVector3(-110,-10,15),btQuaternion(0,1,0,cos(0)),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
+            btVector3( -110,-10,70),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
+            btVector3( -110,-10,125),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),  
+            btVector3(-110,-10,180),btQuaternion(0,1,0,sin(0)),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
+            btVector3( -55,-10,185),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
+            btVector3( 0,-10,185),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
+            btVector3( 55,-10,185),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
+
+
         N=cont;
 
 

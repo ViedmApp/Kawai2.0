@@ -142,6 +142,8 @@ void Game::main_loop()
             continue;
 	    lastFrame = currentFrame;
         this->timer++;
+        btQuaternion rotacion = vehicle1->getRotation();
+        printf("%f     %f     %f     %f\n",rotacion.x() , rotacion.y(), rotacion.z(), rotacion.w());
         dynamicsWorld->stepSimulation(1.f / 60.f, 10);
         input->initialiceInput();
 
