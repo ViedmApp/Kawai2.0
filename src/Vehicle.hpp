@@ -39,6 +39,10 @@ public:
     float getX();
     float getY();
     float getZ();
+    float getXTrap();
+    float getYTrap();
+    float getZTrap();
+
     float getHealth();
     bool getIsAlive();
     bool getBrake();

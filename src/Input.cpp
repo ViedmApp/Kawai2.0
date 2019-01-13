@@ -23,7 +23,7 @@ void Input::initialiceInput(){
 
   if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS and !firstPlayer->isSlowed)
     firstPlayer ->accelerate();
-  
+
   if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS)
   {
     btVector3 position = mapa->getP1StartPosition();
@@ -31,8 +31,8 @@ void Input::initialiceInput(){
     firstPlayer->updateTurn();
     firstPlayer -> setPosition(position[0],position[1],position[2]);
   }
-    
-  
+
+
   if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_RELEASE)
     firstPlayer -> updatePhysics();
   if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
@@ -56,7 +56,7 @@ void Input::initialiceInput(){
   }
   if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS and !trampa1 and mapa -> trampa_P1 -> cdCount <= 0.0f)
   {
-    mapa -> crearTrampa(firstPlayer->getX(),firstPlayer->getY(),firstPlayer->getZ(),1);
+    mapa -> crearTrampa(firstPlayer->getXTrap(),firstPlayer->getYTrap(),firstPlayer->getZTrap(),1);
     trampa1 = true;
   }
   else if(glfwGetKey(window, GLFW_KEY_P) == GLFW_RELEASE and trampa1)
@@ -81,7 +81,7 @@ void Input::initialiceInput(){
     secondPlayer -> reverse();
   if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS and !trampa2 and mapa -> trampa_P2 -> cdCount <= 0.0f)
   {
-    mapa -> crearTrampa(secondPlayer->getX(),secondPlayer->getY(),secondPlayer->getZ(),2);
+    mapa -> crearTrampa(secondPlayer->getXTrap(),secondPlayer->getYTrap(),secondPlayer->getZTrap(),2);
     trampa2 = true;
   }
   else if(glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE and trampa2)
@@ -96,7 +96,7 @@ void Input::initialiceInput(){
     bala2=false;
   }
 
-    
+
 
 camara->setCameraPos(glm::vec3(camara->getCameraPos().x - 0.15*(camara->getCameraPos().x - prevPlayerX),
   0,

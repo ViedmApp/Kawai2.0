@@ -211,12 +211,34 @@ int Vehicle::getWheelNumVerts()
 float Vehicle::getX()
 {
     btTransform trans;
+    this -> getRigidBody()->getMotionState()->getWorldTransform(trans);
+    return trans.getOrigin()[0];
+}
+
+float Vehicle::getY()
+{
+    btTransform trans;
+    this -> getRigidBody()->getMotionState()->getWorldTransform(trans);
+    return trans.getOrigin()[1];
+}
+
+float Vehicle::getZ()
+{
+    btTransform trans;
+    this -> getRigidBody()->getMotionState()->getWorldTransform(trans);
+    return trans.getOrigin()[2];
+}
+
+
+float Vehicle::getXTrap()
+{
+    btTransform trans;
     btVector3 valores = this->getRigidBody()->getCenterOfMassPosition() - (this->getRigidBody()->getLinearVelocity().normalized() *6);
     this -> getRigidBody()->getMotionState()->getWorldTransform(trans);
     return valores[0];
 }
 
-float Vehicle::getY()
+float Vehicle::getYTrap()
 {
     btTransform trans;
     btVector3 valores = this->getRigidBody()->getCenterOfMassPosition() - (this->getRigidBody()->getLinearVelocity().normalized() *6);
@@ -224,13 +246,15 @@ float Vehicle::getY()
     return valores[1];
 }
 
-float Vehicle::getZ()
+float Vehicle::getZTrap()
 {
     btTransform trans;
     btVector3 valores = this->getRigidBody()->getCenterOfMassPosition() - (this->getRigidBody()->getLinearVelocity().normalized() *6);
     this -> getRigidBody()->getMotionState()->getWorldTransform(trans);
     return valores[2];
 }
+
+
 void Vehicle::shootBullet(){
 
         existBala = true;
