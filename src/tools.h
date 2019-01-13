@@ -20,6 +20,12 @@
 #include "stdarg.h"
 #include <iostream>
 #include <irrKlang.h>
+#include "stb_image.h"
+
 #define PI 3.14159265359
+#define SKYBOX_SHADER_FRAG "shaders/sky_frag.glsl"
+#define SKYBOX_SHADER_VERT "shaders/sky_vert.glsl"
+
+
 
 #endif
