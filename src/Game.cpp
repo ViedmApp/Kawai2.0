@@ -161,6 +161,13 @@ void Game::main_loop()
 		vehicle1->bala->draw(model_mat_location);
 		vehicle2->bala->draw(model_mat_location);
 
+/*
+		    	debug->setView(&view);
+		debug->setProj(&projection);
+		dynamicsWorld->debugDrawWorld();
+		debug->drawLines();
+
+*/
         glViewport (g_gl_width/2, 0, g_gl_width/2, g_gl_height);
         projection2 = camara2->getPerspectiva();
         glUniformMatrix4fv (proj_mat_location, 1, GL_FALSE, &projection2[0][0]);
@@ -180,10 +187,6 @@ void Game::main_loop()
 
 		checkWinCondition();
 		
-    	/*debug->setView(&view);
-		debug->setProj(&projection);
-		dynamicsWorld->debugDrawWorld();
-		debug->drawLines();*/
 	    
 		
         glfwSwapBuffers(g_window);

@@ -5,7 +5,7 @@
     this -> dynamicsWorld = dynamicsWorld;
     this -> shader_programme = shader_programme;
     this -> trampa_P1 = new Trampa((char*)"mallas/box.obj",shader_programme,btScalar(0),
-        btVector3(100,100,100),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/",1);
+        btVector3(100,100,100),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/metalestrella.png",1);
     this -> trampa_P2 = new Trampa((char*)"mallas/box.obj",shader_programme,btScalar(0),
         btVector3(100,100,100),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/pika_ae86_t.png",2);
     init();
