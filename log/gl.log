@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-GL_LOG_FILE log. local time Sat Jan 12 09:39:31 2019
-=======
-GL_LOG_FILE log. local time Sat Jan 12 04:08:25 2019
->>>>>>> 0d016508601dc3bb9540747f398e9fe86f7029da
+GL_LOG_FILE log. local time Sun Jan 13 14:52:06 2019
 
-starting GLFW 3.2.1 X11 GLX EGL clock_gettime /dev/js Xf86vm sharedrenderer: AMD RAVEN (DRM 3.27.0, 4.19.12-1-default, LLVM 7.0.0)
-version: 4.5 (Compatibility Profile) Mesa 18.3.1
+starting GLFW 3.2.1 X11 GLX EGL clock_gettime /dev/js Xf86vm sharedrenderer: Mesa DRI Intel(R) HD Graphics 530 (Skylake GT2) 
+version: 3.0 Mesa 18.2.6
 creating shader from shaders/phong.vert...
 shader compiled. index 1
 creating shader from shaders/phong.frag...

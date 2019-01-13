@@ -10,7 +10,7 @@ Vehicle::Vehicle(const char* path, GLuint shaderprog, btScalar masa, btVector3 s
     this -> tag = tag;
     assert(load_mesh((char*)"mallas/tire_20.obj",this -> wheel_vao,this -> wheel_num_verts));
     this->bala= new GameObject((char*)"mallas/ball.obj",shader_programme,btScalar(3.2),
-btVector3(100,100,100),btQuaternion(0,1,0,0),world, (char*)"mallas/background_1920.png");
+btVector3(100,100,100),btQuaternion(0,1,0,0),world, (char*)"textures/metalestrella.png");
 }
 
 Vehicle::Vehicle(const char* path, GLuint shaderprog, btScalar masa, btVector3 startPosition,
@@ -247,7 +247,7 @@ void Vehicle::shootBullet(){
 
 
         if (en_movimiento)
-            bala->getRigidBody()->setLinearVelocity(50 * this->getRigidBody()->getLinearVelocity().normalized());
+            bala->getRigidBody()->setLinearVelocity(100 * this->getRigidBody()->getLinearVelocity().normalized());
         else
             bala->getRigidBody()->setLinearVelocity(btVector3(35, 0, 0));
 
