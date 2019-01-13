@@ -21,11 +21,13 @@ void Mapa::init()
     int map = /*rand()%2 +1;*/ 1;
     if (map == 1)
     {
-        N = 32;
+        N = 33;
         int cont = 0;
-        p1_Start_Position = btVector3(-3,1,90);
-        p2_Start_Position = btVector3(290,1,-80);
+        p1_Start_Position = btVector3(-4,3,90);
+        p2_Start_Position = btVector3(4,3,90);
         mapa = (GameObject**)malloc(((N*3))*sizeof(GameObject));
+        mapa[cont++] = new GameObject((char*)"mallas/grass_bg.obj",shader_programme,btScalar(0),
+            btVector3( 0,-7.9,80),btQuaternion(0,0,0),dynamicsWorld, (char*)"textures/pastito.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/start.obj",shader_programme,btScalar(0),
             btVector3( 0,-12,115),btQuaternion(0,0,0),dynamicsWorld, (char*)"textures/start.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
@@ -238,9 +240,9 @@ void Mapa::init()
             btVector3( 290,-10,-170),btQuaternion(0,0,0),dynamicsWorld, (char*)"textures/Rainbow-Texture.jpg");
 
     }
-    /*else if (map == 2)
+    else if (map == 2)
     {
-        N = 12;
+        N = 3;
         int cont = 0;
         p1_Start_Position = btVector3(-3,1,90);
         p2_Start_Position = btVector3(4,1,90);
@@ -251,25 +253,15 @@ void Mapa::init()
             btVector3(0,-10,15),btQuaternion(-2*PI,0,0),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
             btVector3( -55,-10,15),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
-            btVector3( 125,-10,15),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),
-            btVector3(180,-10,15),btQuaternion(-2*PI,0,0),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
-            btVector3( 180,-10,70),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),
-            btVector3(180,-10,125),btQuaternion(0,1,0,sin(0)),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
-            btVector3( 235,-10,125),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),
-            btVector3(290,-10,125),btQuaternion(-2*PI,0,0),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
-            btVector3( 290,-10,180),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),
-            btVector3(290,-10,235),btQuaternion(3*PI/2,0,0),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
-            btVector3( 235,-10,235),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-    }*/
+            btVector3(-110,-10,15),btQuaternion(0,1,0,cos(0)),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
+        N=cont;
+
+
+        meta = new GameObject((char*)"mallas/goal2.obj",shader_programme,btScalar(0),
+            btVector3( 290,-10,-170),btQuaternion(0,0,0),dynamicsWorld, (char*)"textures/Rainbow-Texture.jpg");
+
+    }
 }
 
 btVector3 Mapa::getP1StartPosition()
