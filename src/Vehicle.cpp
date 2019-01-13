@@ -92,9 +92,9 @@ void Vehicle::setVehicle(btRaycastVehicle* vehicle){
 
 void Vehicle::accelerate()
 {
- if (vehicle->getCurrentSpeedKmHour() < 120.f)    {
-        this->vehicle->applyEngineForce(60.f, 0); //TODO: Param
-        this->vehicle->applyEngineForce(60.f, 1);
+ if (vehicle->getCurrentSpeedKmHour() < 130.f)    {
+        this->vehicle->applyEngineForce(70.f, 0); //TODO: Param
+        this->vehicle->applyEngineForce(70.f, 1);
     }
 }
 void Vehicle::brake()
@@ -116,8 +116,8 @@ void Vehicle::noBrake()
 void Vehicle::reverse()
 {
     //TODO: ADD LIMIT
-    this->vehicle->applyEngineForce(-50, 0); //TODO: Param
-    this->vehicle->applyEngineForce(-50, 1); //TODO:
+    this->vehicle->applyEngineForce(-80, 0); //TODO: Param
+    this->vehicle->applyEngineForce(-80, 1); //TODO:
 }
 
 void Vehicle::slowDown(float debuff_time)

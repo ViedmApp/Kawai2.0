@@ -150,16 +150,20 @@ void Game::main_loop()
 
         glUseProgram (shader_programme);
 
-		glViewport (0, 0, g_gl_width/2, g_gl_height);
-        projection = camara->getPerspectiva();
-        glUniformMatrix4fv (proj_mat_location, 1, GL_FALSE, &projection[0][0]);
-        view = camara->getViewMatrix();
-        glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, &view[0][0]);
-        vehicle1->draw(model_mat_location);
-    	vehicle2->draw(model_mat_location);
-		mapa -> draw(model_mat_location);
-		vehicle1->bala->draw(model_mat_location);
-		vehicle2->bala->draw(model_mat_location);
+		
+        if (!win_P1)
+        {
+        	glViewport (0, 0, g_gl_width/2, g_gl_height);
+        	projection = camara->getPerspectiva();
+        	glUniformMatrix4fv (proj_mat_location, 1, GL_FALSE, &projection[0][0]);
+        	view = camara->getViewMatrix();
+        	glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, &view[0][0]);
+	        vehicle1->draw(model_mat_location);
+	    	vehicle2->draw(model_mat_location);
+			mapa -> draw(model_mat_location);
+			vehicle1->bala->draw(model_mat_location);
+			vehicle2->bala->draw(model_mat_location);
+        }
 
 /*
 		    	debug->setView(&view);
@@ -168,16 +172,20 @@ void Game::main_loop()
 		debug->drawLines();
 
 */
-        glViewport (g_gl_width/2, 0, g_gl_width/2, g_gl_height);
-        projection2 = camara2->getPerspectiva();
-        glUniformMatrix4fv (proj_mat_location, 1, GL_FALSE, &projection2[0][0]);
-        view2 = camara2->getViewMatrix();
-        glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, &view2[0][0]);
-    	vehicle1->draw(model_mat_location);
-    	vehicle2->draw(model_mat_location);
-		mapa -> draw(model_mat_location);
-		vehicle1->bala->draw(model_mat_location);
-		vehicle2->bala->draw(model_mat_location);
+        
+    	if (!win_P2)
+        {
+        	glViewport (g_gl_width/2, 0, g_gl_width/2, g_gl_height);
+        	projection2 = camara2->getPerspectiva();
+	        glUniformMatrix4fv (proj_mat_location, 1, GL_FALSE, &projection2[0][0]);
+	        view2 = camara2->getViewMatrix();
+	        glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, &view2[0][0]);
+	        vehicle1->draw(model_mat_location);
+	    	vehicle2->draw(model_mat_location);
+			mapa -> draw(model_mat_location);
+			vehicle1->bala->draw(model_mat_location);
+			vehicle2->bala->draw(model_mat_location);
+        }
 
 		DetectCollision();
 
@@ -211,14 +219,12 @@ void Game::DetectCollision()
 			vehicle2 -> slowDown(1.5f);
 			mapa->trampa_P1 -> setPosition(100,100,100);
 			mapa -> trampa_P1_exists = false;
-			win_P2 = true;
 		}
 		else if (vehicle2 == obA->getUserPointer() and mapa->trampa_P1 == obB->getUserPointer())
 		{
 			vehicle2 -> slowDown(1.5f);
 			mapa->trampa_P1 -> setPosition(100,100,100);
 			mapa -> trampa_P1_exists = false;
-			win_P2 = true;
 		}
 		
 		if (mapa->trampa_P2 == obA->getUserPointer() and vehicle1 == obB->getUserPointer())
@@ -226,14 +232,12 @@ void Game::DetectCollision()
 			vehicle1 -> slowDown(1.5f);
 			mapa->trampa_P2 -> setPosition(100,100,100);
 			mapa -> trampa_P2_exists = false;
-			win_P1 = true;
 		}
 		else if ( vehicle1 == obA->getUserPointer() and mapa->trampa_P2 == obB->getUserPointer())
 		{
 			vehicle1 -> slowDown(1.5f);
 			mapa->trampa_P2 -> setPosition(100,100,100);
 			mapa -> trampa_P2_exists = false;
-			win_P1 = true;
 		}
 		if (vehicle1->bala == obA->getUserPointer() and vehicle2 == obB->getUserPointer())
         {
@@ -256,6 +260,27 @@ void Game::DetectCollision()
         	vehicle1 -> slowDown(0.5f);
         	vehicle2->bala->setPosition(100,100,100);
         }
+        if (mapa->meta == obA->getUserPointer() and vehicle1 == obB->getUserPointer())
+		{
+			win_P1 = true;
+			vehicle1 -> setPosition(0,100,0);
+		}
+		else if ( vehicle1 == obA->getUserPointer() and mapa->meta == obB->getUserPointer())
+		{
+			win_P1 = true;
+			vehicle1 -> setPosition(0,100,0);
+		}
+		if (mapa->meta == obA->getUserPointer() and vehicle2 == obB->getUserPointer())
+		{
+			win_P2 = true;
+			vehicle2 -> setPosition(0,100,0);
+		}
+		else if ( vehicle2 == obA->getUserPointer() and mapa->meta == obB->getUserPointer())
+		{
+			win_P2 = true;
+			vehicle2 -> setPosition(0,100,0);
+		}
+
     }
 }
 

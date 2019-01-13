@@ -18,6 +18,7 @@ protected:
 public:
 	Trampa *trampa_P1;
 	Trampa *trampa_P2;
+	GameObject* meta;
 	bool trampa_P1_exists = false;
 	bool trampa_P2_exists = false;
     Mapa(btDiscreteDynamicsWorld* dynamicsWorld,GLuint shader_programme);
