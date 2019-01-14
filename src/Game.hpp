@@ -7,6 +7,7 @@
 #include "Mapa.hpp"
 #include "GLDebugDrawer.hpp"
 #include "Light.hpp"
+#include <unistd.h>
 #define GL_LOG_FILE "log/gl.log"
 #define VERTEX_SHADER_FILE "shaders/phong.vert"
 #define FRAGMENT_SHADER_FILE "shaders/phong.frag"

@@ -17,7 +17,7 @@ void Game::init()
 {
 
 
-
+	printf("Cargando todo\n");
 	glm::vec3 cameraPos   = glm::vec3(3.0f, 5.0f, 30.0f);
 	glm::vec3 cameraFront = glm::vec3(0.0f, -1.0f, -1.0f);
 	glm::vec3 cameraLook = glm::vec3(0.0f,0.0f,0.0f);
@@ -33,7 +33,7 @@ void Game::init()
 	float lastX =  g_gl_width / 2.0;
 	float lastY =  g_gl_height / 2.0;
 	float fov   =  45.0f;
-	
+	printf("Creando Camaras\n");
 	this->camara=new Camera(cameraPos,cameraFront,cameraUp,fov,pitch,yaw,g_gl_width,g_gl_height);
 
 	cameraPos   = glm::vec3(-3.0f, 5.0f, 30.0f);
@@ -49,8 +49,8 @@ void Game::init()
 	fov   =  45.0f;
 
 	this->camara2=new Camera(cameraPos,cameraFront,cameraUp,fov,pitch,yaw,g_gl_width,g_gl_height);
-
-	
+	printf("Camaras Creadas\n");
+	printf("Seteando Camaras\n");
 	restart_gl_log ();
 	start_gl ();
 	glEnable (GL_DEPTH_TEST); 
@@ -69,7 +69,8 @@ void Game::init()
 
     this->projection2 = camara2->getPerspectiva();
     this->view2 = camara2->getViewMatrix();
-
+    printf("Camaras seteadas\n");
+    printf("Seteando mundo\n");
 	this->view_mat_location = glGetUniformLocation (shader_programme, "view");
 	glUseProgram (shader_programme);
 	glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, &view[0][0]);
@@ -87,6 +88,7 @@ void Game::init()
 	
 	this->dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
 	dynamicsWorld->setGravity(btVector3(0, -10, 0));
+	printf("Mundo Listo\n");
 	this->mapa = new Mapa(dynamicsWorld,shader_programme);
 
 	this->vehicle1 = new Vehicle((char*)"mallas/ae86-t.obj",shader_programme,btScalar(25),
@@ -106,6 +108,7 @@ void Game::init()
 	vehicle1 -> updatePhysics();
 	vehicle2 -> updatePhysics();
 
+	printf("Creando Luces\n");
 	Light* lights_arr = new Light(shader_programme);
 	lights_arr->addLight(glm::vec3(10.0, 10.0, 10.0),
 		glm::vec3 (1.0, 0.0, 0.0),
@@ -125,13 +128,14 @@ void Game::init()
 		glm::vec3 (1.0, 1.0, 1.0),12);
 	
 	lights_arr->initLights();
-
-
+	printf("Luces Listas\n");
+	printf("Iniciando Juego \n");
 }
 
 
 void Game::main_loop()
 {
+	printf("A jugar\n");
 	float deltaTime = 0.0f;
 	float lastFrame = 0.0f;
 	while (!glfwWindowShouldClose(g_window))
@@ -142,8 +146,6 @@ void Game::main_loop()
             continue;
 	    lastFrame = currentFrame;
         this->timer++;
-        btQuaternion rotacion = vehicle1->getRotation();
-        printf("%f     %f     %f     %f\n",rotacion.x() , rotacion.y(), rotacion.z(), rotacion.w());
         dynamicsWorld->stepSimulation(1.f / 60.f, 10);
         input->initialiceInput();
 
@@ -210,7 +212,6 @@ void Game::main_loop()
 void Game::DetectCollision()
 {
 	int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
-	//printf("NumeroManifolds %d\n",numManifolds);
 	for (int i = 0; i < numManifolds; i++)
     {
         btPersistentManifold* contactManifold = dynamicsWorld->getDispatcher()->getManifoldByIndexInternal(i);

@@ -6,11 +6,15 @@ Vehicle::Vehicle(const char* path, GLuint shaderprog, btScalar masa, btVector3 s
     const char* texture_path, int tag)
 : GameObject(path,shaderprog,masa,startPosition,startRotation,dynamicsWorld,texture_path)
 {
+    printf("Creando Auto\n");
     initialize();
+    printf("Auto creado\n");
     this -> tag = tag;
+    printf("Creando Ruedas\n");
     assert(load_mesh((char*)"mallas/tire_20.obj",this -> wheel_vao,this -> wheel_num_verts));
     this->bala= new GameObject((char*)"mallas/ball.obj",shader_programme,btScalar(3.2),
-btVector3(100,100,100),btQuaternion(0,1,0,0),world, (char*)"textures/metalestrella.png");
+    btVector3(1000,-100,1000),btQuaternion(0,1,0,0),world, (char*)"textures/metalestrella.png");
+    printf("Ruedas y balas listo\n");
 }
 
 Vehicle::Vehicle(const char* path, GLuint shaderprog, btScalar masa, btVector3 startPosition,

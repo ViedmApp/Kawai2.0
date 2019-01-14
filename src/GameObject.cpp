@@ -86,16 +86,10 @@ bool GameObject::load_mesh (const char* file_name, GLuint& vao, int& vert_no, bt
         fprintf (stderr, "ERROR: reading mesh %s\n", file_name);
         return false;
     }
-    printf ("  %i animations\n", scene->mNumAnimations);
-    printf ("  %i cameras\n", scene->mNumCameras);
-    printf ("  %i lights\n", scene->mNumLights);
-    printf ("  %i materials\n", scene->mNumMaterials);
-    printf ("  %i meshes\n", scene->mNumMeshes);
-    printf ("  %i textures\n", scene->mNumTextures);
+
 
     /* get first mesh in file only */
     const aiMesh* mesh = scene->mMeshes[0];
-    printf ("    %i vertices in %s\n", mesh->mNumVertices, file_name);
 
     /* pass back number of vertex points in mesh */
     vert_no = mesh->mNumVertices;
@@ -136,7 +130,6 @@ bool GameObject::load_mesh (const char* file_name, GLuint& vao, int& vert_no, bt
         }
     }
     if (mesh->HasTextureCoords (0)) {
-        printf("    %i texture coords\n", vert_no*2);
         texcoords = (GLfloat*)malloc (vert_no * 2 * sizeof (GLfloat));
         for (int i = 0; i < vert_no; i++) {
             const aiVector3D* vt = &(mesh->mTextureCoords[0][i]);
@@ -144,7 +137,6 @@ bool GameObject::load_mesh (const char* file_name, GLuint& vao, int& vert_no, bt
             texcoords[i * 2 + 1] = (GLfloat)vt->y;
         }
     }
-    printf("    %i vertices in collider non optimized\n", collider->getNumPoints());
 
     //Código optimización basado en http://www.bulletphysics.org/mediawiki-1.5.8/index.php/BtShapeHull_vertex_reduction_utility
     //Ligeramente modificado, ya que lo que sale en la wiki esta malo
@@ -152,7 +144,6 @@ bool GameObject::load_mesh (const char* file_name, GLuint& vao, int& vert_no, bt
     btScalar margin = collider->getMargin();
     hull->buildHull(margin);
     btConvexHullShape* simplifiedConvexShape = new btConvexHullShape((const btScalar*)hull->getVertexPointer(), hull->numVertices(), sizeof(btVector3));
-    printf("    %i vertices in collider optimized\n", simplifiedConvexShape->getNumPoints());
 
     //libera memoria del primer collider no-optimzado
     delete collider;
@@ -207,7 +198,6 @@ bool GameObject::load_mesh (const char* file_name, GLuint& vao, int& vert_no, bt
     }
 
     aiReleaseImport (scene);
-    printf ("mesh loaded\n");
 
     return true;
 }
@@ -218,15 +208,8 @@ bool GameObject::load_mesh (const char* file_name, GLuint& vao, int& vert_no) {
         fprintf (stderr, "ERROR: reading mesh %s\n", file_name);
         return false;
     }
-    printf ("  %i animations\n", scene->mNumAnimations);
-    printf ("  %i cameras\n", scene->mNumCameras);
-    printf ("  %i lights\n", scene->mNumLights);
-    printf ("  %i materials\n", scene->mNumMaterials);
-    printf ("  %i meshes\n", scene->mNumMeshes);
-    printf ("  %i textures\n", scene->mNumTextures);
 
     const aiMesh* mesh = scene->mMeshes[0];
-    printf ("    %i vertices in %s\n", mesh->mNumVertices, file_name);
 
     vert_no = mesh->mNumVertices;
 
@@ -311,7 +294,6 @@ bool GameObject::load_mesh (const char* file_name, GLuint& vao, int& vert_no) {
     }
 
     aiReleaseImport (scene);
-    printf ("mesh loaded\n");
 
     return true;
 }
@@ -425,8 +407,6 @@ bool GameObject::load_texture (GLuint shaderprog, const char* texture_path, cons
 			fprintf (stderr, "ERROR: could not load %s\n", texture_path);
 		}
 
-		if ((x & (x - 1)) != 0 || (y & (y - 1)) != 0)
-			fprintf (stderr, "WARNING: texture %s is not power-of-2 dimensions: %i, %i\n", texture_path, x, y);
 
 		int width_in_bytes = x * 4;
 		unsigned char *top = NULL;
@@ -470,8 +450,7 @@ bool GameObject::load_texture (GLuint shaderprog, const char* texture_path, cons
 				fprintf (stderr, "ERROR: could not load %s\n", normal_path);
 			}
 
-			if ((x & (x - 1)) != 0 || (y & (y - 1)) != 0)
-				fprintf (stderr, "WARNING: texture %s is not power-of-2 dimensions: %i, %i\n", normal_path, x, y);
+			
 
 			width_in_bytes = x * 4;
 			top = NULL;
@@ -517,8 +496,7 @@ bool GameObject::load_texture2 (GLuint shaderprog, const char* texture_path, GLu
 		fprintf (stderr, "ERROR: could not load %s\n", texture_path);
 	}
 
-	if ((x & (x - 1)) != 0 || (y & (y - 1)) != 0)
-		fprintf (stderr, "WARNING: texture %s is not power-of-2 dimensions: %i, %i\n", texture_path, x, y);
+
 
 	int width_in_bytes = x * 4;
 	unsigned char *top = NULL;
