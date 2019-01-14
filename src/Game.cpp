@@ -156,6 +156,19 @@ void Game::main_loop()
 			vehicle1->bala->draw(model_mat_location);
 			vehicle2->bala->draw(model_mat_location);
         }
+        else
+        {
+        	glViewport (0, 0, g_gl_width/2, g_gl_height);
+        	projection = camara2->getPerspectiva();
+        	glUniformMatrix4fv (proj_mat_location, 1, GL_FALSE, &projection[0][0]);
+        	view = camara2->getViewMatrix();
+        	glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, &view[0][0]);
+	        vehicle1->draw(model_mat_location);
+	    	vehicle2->draw(model_mat_location);
+			mapa -> draw(model_mat_location);
+			vehicle1->bala->draw(model_mat_location);
+			vehicle2->bala->draw(model_mat_location);
+        }
 
 /*
 		    	debug->setView(&view);
@@ -177,6 +190,19 @@ void Game::main_loop()
 			mapa -> draw(model_mat_location);
 			vehicle1->bala->draw(model_mat_location);
 			vehicle2->bala->draw(model_mat_location);
+        }
+        else
+        {
+        	glViewport (g_gl_width/2, 0, g_gl_width/2, g_gl_height);
+        	projection2 = camara->getPerspectiva();
+	        glUniformMatrix4fv (proj_mat_location, 1, GL_FALSE, &projection2[0][0]);
+	        view2 = camara->getViewMatrix();
+	        glUniformMatrix4fv(view_mat_location, 1, GL_FALSE, &view2[0][0]);
+	        vehicle1->draw(model_mat_location);
+	    	vehicle2->draw(model_mat_location);
+			mapa -> draw(model_mat_location);
+			vehicle1->bala->draw(model_mat_location);
+			vehicle2->bala->draw(model_mat_location);	
         }
 
 		DetectCollision();
