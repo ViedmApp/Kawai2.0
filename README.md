@@ -21,11 +21,11 @@ Built With
     GLEW - The OpenGL Extension Wrangler Library
 
 Authors
-
-    Benjamín Lazo L. - mWrathion
-    Paula Mancilla A. - Pauleera
-    Mathías Oyarzún A. - moyarzun94
-    Eduardo Vera B. - eduvera
+    ViedmappGames:
+        Benjamín Lazo L. - mWrathion
+        Paula Mancilla A. - Pauleera
+        Mathías Oyarzún A. - moyarzun94
+        Eduardo Vera B. - eduvera
 
 License
 
