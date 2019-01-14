@@ -21,7 +21,9 @@ Built With
     GLEW - The OpenGL Extension Wrangler Library
 
 Authors
+
     ViedmappGames:
+    
         Benjamín Lazo L. - mWrathion
         Paula Mancilla A. - Pauleera
         Mathías Oyarzún A. - moyarzun94
