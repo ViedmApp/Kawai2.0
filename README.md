@@ -7,12 +7,12 @@ Kawii-Metal Racing necesita de glew , bullet physics , GLFW , glm
 
 para arch linux
 
-sudo pacman -S glew bullet glfw glm
+    sudo pacman -S glew bullet glfw glm
 
 y ejecutar
 
-make (compilar)
-./bin/prog (ejecutar)
+    make (compilar)
+    ./bin/prog (ejecutar)
 
 Built With
 
