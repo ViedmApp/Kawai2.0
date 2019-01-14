@@ -3,7 +3,7 @@ Videojuego de carreras arcade creado en c++ usando OpenGL , desarrollado para la
 Getting Started
 Prerequisites
 
-BAI necesita de glew , bullet physics , GLFW , glm
+Kawii-Metal Racing necesita de glew , bullet physics , GLFW , glm
 
 para arch linux
 
