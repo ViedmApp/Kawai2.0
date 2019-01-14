@@ -36,7 +36,11 @@ int main()
 	{
 		engine->play2D("multi/idz.ogg", true);
 	}
-
+	printf("\nReglas del Juego:\n");
+	printf("Player 1:\n");
+	printf("Movimiento: W A S D, Disparo: F, Trampa: G, Respawn: R\n\n");
+	printf("Player 2:\n");
+	printf("Movimiento: UP RIGHT DOWN LEFT, Disparo: J, Trampa: K, Respawn: I\n\n");
 	game -> main_loop();
 
 	engine->drop();
