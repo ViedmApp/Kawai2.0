@@ -26,10 +26,16 @@ void Input::initialiceInput(){
 
   if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS)
   {
-    btVector3 position = mapa->getP1StartPosition();
-    firstPlayer->updatePhysics();
-    firstPlayer->updateTurn();
-    firstPlayer -> setPosition(position[0],position[1],position[2]);
+
+    btVector3 position = firstPlayer->getPosition();
+
+    firstPlayer -> setPosition(firstPlayer->getX(),firstPlayer->getY(),firstPlayer->getZ());
+      firstPlayer->getRigidBody()->setLinearVelocity(btVector3(0,0,0));
+      firstPlayer->getRigidBody()->setAngularVelocity(btVector3(0,0,0));
+      firstPlayer->updatePhysics();
+      firstPlayer->updateTurn();
+
+   //firstPlayer->despawn();
   }
 
 

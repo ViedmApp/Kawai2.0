@@ -92,19 +92,19 @@ bool GameObject::load_mesh (const char* file_name, GLuint& vao, int& vert_no, bt
     printf ("  %i materials\n", scene->mNumMaterials);
     printf ("  %i meshes\n", scene->mNumMeshes);
     printf ("  %i textures\n", scene->mNumTextures);
-    
+
     /* get first mesh in file only */
     const aiMesh* mesh = scene->mMeshes[0];
     printf ("    %i vertices in %s\n", mesh->mNumVertices, file_name);
-    
+
     /* pass back number of vertex points in mesh */
     vert_no = mesh->mNumVertices;
-    
+
     /* generate a VAO, using the pass-by-reference parameter that we give to the
     function */
     glGenVertexArrays (1, &vao);
     glBindVertexArray (vao);
-    
+
     /* we really need to copy out all the data from AssImp's funny little data
     structures into pure contiguous arrays before we copy it into data buffers
     because assimp's texture coordinates are not really contiguous in memory.
@@ -205,10 +205,10 @@ bool GameObject::load_mesh (const char* file_name, GLuint& vao, int& vert_no, bt
     if (mesh->HasTangentsAndBitangents ()) {
         // NB: could store/print tangents here
     }
-    
+
     aiReleaseImport (scene);
     printf ("mesh loaded\n");
-    
+
     return true;
 }
 
@@ -377,8 +377,11 @@ void GameObject::setPosition(float x,float y,float z)
     this -> z = z;
     btVector3 position(x,y,z);
     btTransform aux;
+    btQuaternion rotacion = this->getRotation();
+
     aux.setIdentity();
     aux.setOrigin(position);
+    aux.setRotation(btQuaternion(0,rotacion.y(),0,rotacion.w()));
     btDefaultMotionState* state = new btDefaultMotionState(aux);
     this -> getRigidBody() -> setMotionState(state);
 }
@@ -400,18 +403,18 @@ void GameObject::draw(GLuint model_mat_location){
     trans.getOpenGLMatrix(&model[0][0]);
     this -> setModelMatrix(this->model);
     glUniformMatrix4fv(model_mat_location, 1, GL_FALSE, &modelMatrix[0][0]);
-    
+
         glActiveTexture (GL_TEXTURE0);
 	glBindTexture (GL_TEXTURE_2D, this->texture);
     glUniform1i (tex_location, 0);
-    
+
     glActiveTexture (GL_TEXTURE1);
 	glBindTexture (GL_TEXTURE_2D, this->normalMap);
     //glUniform1i (normalMapLocation, 1);
-    
+
     glBindVertexArray(this->getVao());
     glDrawArrays(GL_TRIANGLES, 0, this -> getNumVertices());
-    
+
 }
 
 bool GameObject::load_texture (GLuint shaderprog, const char* texture_path, const char* normal_path){
@@ -421,16 +424,16 @@ bool GameObject::load_texture (GLuint shaderprog, const char* texture_path, cons
 		if (!image_data) {
 			fprintf (stderr, "ERROR: could not load %s\n", texture_path);
 		}
-	
-		if ((x & (x - 1)) != 0 || (y & (y - 1)) != 0) 
+
+		if ((x & (x - 1)) != 0 || (y & (y - 1)) != 0)
 			fprintf (stderr, "WARNING: texture %s is not power-of-2 dimensions: %i, %i\n", texture_path, x, y);
-	
+
 		int width_in_bytes = x * 4;
 		unsigned char *top = NULL;
 		unsigned char *bottom = NULL;
 		unsigned char temp = 0;
 		int half_height = y / 2;
-	
+
 		for(int row = 0; row < half_height; row++) {
 			top = image_data + row * width_in_bytes;
 			bottom = image_data + (y - row - 1) * width_in_bytes;
@@ -442,7 +445,7 @@ bool GameObject::load_texture (GLuint shaderprog, const char* texture_path, cons
 				bottom++;
 			}
 		}
-	
+
 		texture = 0;
 		glGenTextures(1, &texture);
 		glActiveTexture(GL_TEXTURE0);
@@ -453,10 +456,10 @@ bool GameObject::load_texture (GLuint shaderprog, const char* texture_path, cons
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glGenerateMipmap(GL_TEXTURE_2D);
-		
-	
+
+
 		tex_location = glGetUniformLocation (shaderprog, "basic_texture");
-		
+
 		free(image_data);
 
 		if (normal_path != NULL) {
@@ -466,16 +469,16 @@ bool GameObject::load_texture (GLuint shaderprog, const char* texture_path, cons
 			if (!image_data2) {
 				fprintf (stderr, "ERROR: could not load %s\n", normal_path);
 			}
-		
-			if ((x & (x - 1)) != 0 || (y & (y - 1)) != 0) 
+
+			if ((x & (x - 1)) != 0 || (y & (y - 1)) != 0)
 				fprintf (stderr, "WARNING: texture %s is not power-of-2 dimensions: %i, %i\n", normal_path, x, y);
-		
+
 			width_in_bytes = x * 4;
 			top = NULL;
 			bottom = NULL;
 			temp = 0;
 			half_height = y / 2;
-		
+
 			for(int row = 0; row < half_height; row++) {
 				top = image_data2 + row * width_in_bytes;
 				bottom = image_data2 + (y - row - 1) * width_in_bytes;
@@ -487,8 +490,8 @@ bool GameObject::load_texture (GLuint shaderprog, const char* texture_path, cons
 					bottom++;
 				}
 			}
-		
-			glActiveTexture(GL_TEXTURE1);			
+
+			glActiveTexture(GL_TEXTURE1);
 			normalMap = 0;
 			glGenTextures(1, &normalMap);
 			glBindTexture(GL_TEXTURE_2D, normalMap);
@@ -497,10 +500,10 @@ bool GameObject::load_texture (GLuint shaderprog, const char* texture_path, cons
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			
+
 			normalMapLoc = glGetUniformLocation (shaderprog, "normal_map");
 
-			free(image_data2);			
+			free(image_data2);
 		}
 		return true;
 }
@@ -514,7 +517,7 @@ bool GameObject::load_texture2 (GLuint shaderprog, const char* texture_path, GLu
 		fprintf (stderr, "ERROR: could not load %s\n", texture_path);
 	}
 
-	if ((x & (x - 1)) != 0 || (y & (y - 1)) != 0) 
+	if ((x & (x - 1)) != 0 || (y & (y - 1)) != 0)
 		fprintf (stderr, "WARNING: texture %s is not power-of-2 dimensions: %i, %i\n", texture_path, x, y);
 
 	int width_in_bytes = x * 4;

@@ -18,7 +18,7 @@
 void Mapa::init()
 {
     srand (time(NULL));
-    int map = /*rand()%2 +1;*/ 2;
+    int map = /*rand()%2 +1;*/ 1;
     if (map == 1)
     {
         N = 33;
@@ -42,7 +42,7 @@ void Mapa::init()
             btVector3(180,-10,15),btQuaternion(-2*PI,0,0),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
             btVector3( 180,-10,70),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),  
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),
             btVector3(180,-10,125),btQuaternion(0,1,0,sin(0)),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
             btVector3( 235,-10,125),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
@@ -58,7 +58,7 @@ void Mapa::init()
             btVector3( 180,-10,235),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
             btVector3( 125,-10,235),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),  
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),
             btVector3(70,-10,235),btQuaternion(0,1,0,sin(0)),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),
             btVector3(70,-10,195),btQuaternion(-2*PI,0,0),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
@@ -66,7 +66,7 @@ void Mapa::init()
             btVector3( 15,-10,195),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
             btVector3( -40,-10,195),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),  
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),
             btVector3(-95,-10,195),btQuaternion(0,1,0,sin(0)),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
             btVector3( -95,-10,140),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
@@ -96,7 +96,7 @@ void Mapa::init()
             btVector3( 290,-10,-135),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
 
         N = cont;
-        
+
 
 
 
@@ -127,9 +127,9 @@ void Mapa::init()
             btVector3( 180,-10,70),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_R.obj",shader_programme,btScalar(0),
             btVector3( 180,-10,70),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_T.obj",shader_programme,btScalar(0),  
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_T.obj",shader_programme,btScalar(0),
             btVector3(180,-10,125),btQuaternion(0,1,0,sin(0)),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_R.obj",shader_programme,btScalar(0),  
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_R.obj",shader_programme,btScalar(0),
             btVector3(180,-10,125),btQuaternion(0,1,0,sin(0)),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_L.obj",shader_programme,btScalar(0),
             btVector3( 235,-10,125),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
@@ -145,7 +145,7 @@ void Mapa::init()
             btVector3( 180,-10,235),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_L.obj",shader_programme,btScalar(0),
             btVector3( 125,-10,235),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_T.obj",shader_programme,btScalar(0),  
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_T.obj",shader_programme,btScalar(0),
             btVector3(70,-10,235),btQuaternion(0,1,0,sin(0)),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_T.obj",shader_programme,btScalar(0),
             btVector3(70,-10,195),btQuaternion(-2*PI,0,0),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
@@ -153,7 +153,7 @@ void Mapa::init()
             btVector3( 15,-10,195),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_L.obj",shader_programme,btScalar(0),
             btVector3( -40,-10,195),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_T.obj",shader_programme,btScalar(0),  
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_T.obj",shader_programme,btScalar(0),
             btVector3(-95,-10,195),btQuaternion(0,1,0,sin(0)),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_L.obj",shader_programme,btScalar(0),
             btVector3( -95,-10,140),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
@@ -181,7 +181,7 @@ void Mapa::init()
             btVector3( 290,-10,-80),btQuaternion(3*PI/2,0,0),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_L.obj",shader_programme,btScalar(0),
             btVector3( 290,-10,-135),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-        
+
 
 
 
@@ -199,7 +199,7 @@ void Mapa::init()
             btVector3( 180,-10,235),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_R.obj",shader_programme,btScalar(0),
             btVector3( 125,-10,235),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_R.obj",shader_programme,btScalar(0),  
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_R.obj",shader_programme,btScalar(0),
             btVector3(70,-10,235),btQuaternion(0,1,0,sin(0)),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_R.obj",shader_programme,btScalar(0),
             btVector3(70,-10,195),btQuaternion(-2*PI,0,0),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
@@ -207,7 +207,7 @@ void Mapa::init()
             btVector3( 15,-10,195),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_R.obj",shader_programme,btScalar(0),
             btVector3( -40,-10,195),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_R.obj",shader_programme,btScalar(0),  
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_R.obj",shader_programme,btScalar(0),
             btVector3(-95,-10,195),btQuaternion(0,1,0,sin(0)),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_R.obj",shader_programme,btScalar(0),
             btVector3( -95,-10,140),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
@@ -263,7 +263,7 @@ void Mapa::init()
             btVector3( -110,-10,70),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
             btVector3( -110,-10,125),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),  
+        mapa[cont++] = new GameObject((char*)"mallas/map_track_turn.obj",shader_programme,btScalar(0),
             btVector3(-110,-10,180),btQuaternion(0,1,0,sin(0)),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
             btVector3( -55,-10,185),btQuaternion(0,1,0,cos(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
@@ -301,15 +301,15 @@ void Mapa::draw(GLuint model_mat_location)
         trans.getOpenGLMatrix(&mapa[i]->model[0][0]);
         mapa[i]->setModelMatrix(mapa[i]->model);
         glUniformMatrix4fv(model_mat_location, 1, GL_FALSE, &mapa[i]->modelMatrix[0][0]);
-        
+
         glActiveTexture (GL_TEXTURE0);
     	glBindTexture (GL_TEXTURE_2D, mapa[i]->texture);
         glUniform1i (mapa[i]->tex_location, 0);
-        
+
         glActiveTexture (GL_TEXTURE1);
     	glBindTexture (GL_TEXTURE_2D, mapa[i]->normalMap);
         //glUniform1i (normalMapLocation, 1);
-        
+
         glBindVertexArray(mapa[i]->getVao());
         glDrawArrays(GL_TRIANGLES, 0, mapa[i]->getNumVertices());
     }
@@ -320,15 +320,15 @@ void Mapa::draw(GLuint model_mat_location)
         trans.getOpenGLMatrix(&trampa_P1->model[0][0]);
         trampa_P1->setModelMatrix(trampa_P1->model);
         glUniformMatrix4fv(model_mat_location, 1, GL_FALSE, &trampa_P1->modelMatrix[0][0]);
-        
+
         glActiveTexture (GL_TEXTURE0);
         glBindTexture (GL_TEXTURE_2D, trampa_P1->texture);
         glUniform1i (trampa_P1->tex_location, 0);
-        
+
         glActiveTexture (GL_TEXTURE1);
         glBindTexture (GL_TEXTURE_2D, trampa_P1->normalMap);
         //glUniform1i (normalMapLocation, 1);
-        
+
         glBindVertexArray(trampa_P1->getVao());
         glDrawArrays(GL_TRIANGLES, 0, trampa_P1->getNumVertices());
     }
@@ -339,15 +339,15 @@ void Mapa::draw(GLuint model_mat_location)
         trans.getOpenGLMatrix(&trampa_P2->model[0][0]);
         trampa_P2->setModelMatrix(trampa_P2->model);
         glUniformMatrix4fv(model_mat_location, 1, GL_FALSE, &trampa_P2->modelMatrix[0][0]);
-        
+
         glActiveTexture (GL_TEXTURE0);
         glBindTexture (GL_TEXTURE_2D, trampa_P2->texture);
         glUniform1i (trampa_P2->tex_location, 0);
-        
+
         glActiveTexture (GL_TEXTURE1);
         glBindTexture (GL_TEXTURE_2D, trampa_P2->normalMap);
         //glUniform1i (normalMapLocation, 1);
-        
+
         glBindVertexArray(trampa_P2->getVao());
         glDrawArrays(GL_TRIANGLES, 0, trampa_P2->getNumVertices());
     }
@@ -356,15 +356,15 @@ void Mapa::draw(GLuint model_mat_location)
     trans.getOpenGLMatrix(&meta->model[0][0]);
     meta->setModelMatrix(meta->model);
     glUniformMatrix4fv(model_mat_location, 1, GL_FALSE, &meta->modelMatrix[0][0]);
-    
+
     glActiveTexture (GL_TEXTURE0);
     glBindTexture (GL_TEXTURE_2D, meta->texture);
     glUniform1i (meta->tex_location, 0);
-    
+
     glActiveTexture (GL_TEXTURE1);
     glBindTexture (GL_TEXTURE_2D, meta->normalMap);
     //glUniform1i (normalMapLocation, 1);
-    
+
     glBindVertexArray(meta->getVao());
     glDrawArrays(GL_TRIANGLES, 0, meta->getNumVertices());
 }
@@ -376,7 +376,7 @@ void Mapa::crearTrampa(float x, float y, float z, int tag)
         this->trampa_P1_exists = true;
         this->trampa_P1 -> setCd(2);
     }
-    
+
     if (tag == 2)
     {
         this->trampa_P2 -> setPosition(x,y,z);
