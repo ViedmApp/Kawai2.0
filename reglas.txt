@@ -1,0 +1,20 @@
+Compilación: make
+ejecución: ./bin/prog
+
+Reglas:
+
+Player 1:
+Movimiento: W A S D
+Disparo: F
+Poner Trampa: G
+Hacer respawn por choque o volcamiento: R
+
+Player 2:
+Movimiento: UP RIGHT DOWN LEFT
+Disparo: J
+Poner Trampa: K
+Hacer respawn por choque o volcamiento: I
+
+
+
+Github: https://github.com/ViedmApp/Kawai2.0
