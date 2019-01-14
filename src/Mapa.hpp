@@ -4,6 +4,8 @@
 #include "GameObject.hpp"
 #include "Trampa.hpp"
 
+
+
 class Mapa{
 
 protected:

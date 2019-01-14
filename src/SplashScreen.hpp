@@ -6,6 +6,7 @@
 #include "Mapa.hpp"
 #include "GLDebugDrawer.hpp"
 #define GL_LOG_FILE "log/gl.log"
+using namespace irrklang;
 
 class SplashScreen
 {
@@ -16,7 +17,7 @@ class SplashScreen
 		glm::mat4 view2;
 		GLuint shader_programme;
 		int view_mat_location;
-
+		ISoundEngine *SoundEngine = createIrrKlangDevice();
 		int proj_mat_location;
 		int model_mat_location;
 		btDiscreteDynamicsWorld* dynamicsWorld;

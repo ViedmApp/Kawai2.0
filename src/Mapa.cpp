@@ -9,9 +9,7 @@
         btVector3(1000,-100,1000),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/metalestrella.png",1);
     this -> trampa_P2 = new Trampa((char*)"mallas/box.obj",shader_programme,btScalar(0),
         btVector3(1000,-100,1000),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/pika_ae86_t.png",2);
-    printf("Eligiendo Mapa\n");
     init();
-    printf("Mapa Listo\n");
     }
     Mapa::~Mapa()
     {
@@ -21,10 +19,10 @@
 void Mapa::init()
 {
     srand (time(NULL));
-    int map = rand()%2 +1;;
+    int map = rand()%2 +1;
     if (map == 1)
     {
-        N = 33;
+        N = 20;
         int cont = 0;
         p1_Start_Position = btVector3(-4,3,90);
         p2_Start_Position = btVector3(4,3,90);
@@ -301,8 +299,6 @@ void Mapa::init()
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat.obj",shader_programme,btScalar(0),
             btVector3( 55,-10,-260),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
        N=cont;
-
-
        mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_R.obj",shader_programme,btScalar(0),
             btVector3( 0,-10,70),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_R.obj",shader_programme,btScalar(0),
@@ -363,7 +359,6 @@ void Mapa::init()
             btVector3(55,-10,-205),btQuaternion(3*PI/2,0,0),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_R.obj",shader_programme,btScalar(0),
             btVector3( 55,-10,-260),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_L.obj",shader_programme,btScalar(0),
             btVector3( 0,-10,70),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_T.obj",shader_programme,btScalar(0),
@@ -391,7 +386,7 @@ void Mapa::init()
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_L.obj",shader_programme,btScalar(0),
             btVector3( 110,-10,70),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_L.obj",shader_programme,btScalar(0),
-            btVector3( 110,-10,15),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
+            btVector3( 110,-10,15),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");     
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_L.obj",shader_programme,btScalar(0),
             btVector3( 110,-10,-40),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_turn_border_T.obj",shader_programme,btScalar(0),
@@ -424,11 +419,8 @@ void Mapa::init()
             btVector3(55,-10,-205),btQuaternion(3*PI/2,0,0),dynamicsWorld,(char*)"textures/map_track_turn_t.png");
         mapa[cont++] = new GameObject((char*)"mallas/map_track_flat_border_L.obj",shader_programme,btScalar(0),
             btVector3( 55,-10,-260),btQuaternion(0,1,0,sin(0)),dynamicsWorld, (char*)"textures/map_track_flat_t.jpg");
-
-
         meta = new GameObject((char*)"mallas/goal2.obj",shader_programme,btScalar(0),
             btVector3( 55,-10,-295),btQuaternion(0,0,0),dynamicsWorld, (char*)"textures/Rainbow-Texture.jpg");
-
     }
 }
 

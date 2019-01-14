@@ -16,7 +16,7 @@ SplashScreen::~SplashScreen()
 void SplashScreen::init()
 {
 
-
+	SoundEngine->play2D("multi/background_music.wav",true);
 
 	glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f, -0.0f);
 	glm::vec3 cameraFront = glm::vec3(0.0f, -1.0f, -1.0f);
@@ -118,7 +118,10 @@ void SplashScreen::main_loop()
 
 				pantalla->draw(model_mat_location);
 				if (glfwGetKey(g_window, GLFW_KEY_ENTER) == GLFW_PRESS)
+				{
+						SoundEngine->drop();
 						glfwSetWindowShouldClose(g_window, true);
+				}
 
     	/*debug->setView(&view);
 		debug->setProj(&projection);
