@@ -1,5 +1,5 @@
 # Kawaii-Metal Racing
-Videojuego de aviones arcade creado en c++ usando OpenGL , desarrollado para la asignatura de Computacion Grafica.
+Videojuego de carreras arcade creado en c++ usando OpenGL , desarrollado para la asignatura de Computacion Grafica.
 Getting Started
 Prerequisites
 
